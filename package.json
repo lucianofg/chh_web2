@@ -9,6 +9,7 @@
   "author": "Luciano Ferreira Gonçalves",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.28.2",
     "express": "^4.17.1",
     "sequelize": "^6.9.0"
   }

@@ -11,6 +11,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Adicionar modelos
-db.Usuario = require('../models/models_postgres/usuario.js')(sequelize, Sequelize);
+db.Usuario = require('../models/usuario')(sequelize, Sequelize);
+db.Concurso = require('../models/concurso')(sequelize, Sequelize);
+db.Item = require('../models/item')(sequelize, Sequelize);
+
 module.exports = db;
 

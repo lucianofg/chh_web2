@@ -13,8 +13,14 @@ module.exports = (Sequelize) => {
                 primaryKey: true
             },
             nome: { type: Sequelize.STRING, allowNull: false },
+            sobrenome: { type: Sequelize.STRING, allowNull: false },
             senha: { type: Sequelize.STRING, allowNull: false },
-            email: { type: Sequelize.STRING, allowNull: false },
+            salt: { type: Sequelize.STRING, allowNull: false },
+            email: { 
+                type: Sequelize.STRING,
+                allowNull: false,
+                unique: true,
+            },
             eAtivo: { 
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
