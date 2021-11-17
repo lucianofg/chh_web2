@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-//const sequelize = new Sequelize('database', 'username', 'password', {
+// Sequelize segue a forma:     banco      usuario     senha
 const sequelize = new Sequelize('web2_db', 'postgres', 'postgres', {
     host: 'localhost',
     dialect: 'postgres'
@@ -11,9 +11,15 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Adicionar modelos
-db.Usuario = require('../models/usuario')(sequelize, Sequelize);
-db.Concurso = require('../models/concurso')(sequelize, Sequelize);
-db.Item = require('../models/item')(sequelize, Sequelize);
+db.Usuario = require('../models/usuario');
+db.Concurso = require('../models/concurso');
+db.Item = require('../models/item');
+db.VotosItemConcurso = require('../models/votacao');
+
+db.Usuario.sync()
+db.Concurso.sync()
+db.Item.sync()
+db.VotosItemConcurso.sync()
 
 module.exports = db;
 

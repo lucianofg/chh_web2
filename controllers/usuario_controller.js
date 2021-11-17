@@ -1,8 +1,9 @@
-const db = require('../config/sequelize_postgres');
+const Usuario = require('../config/sequelize_postgres');
 const argon = require('argon2');
 const crypto = require('crypto');
 const TAMANHO_SALT = 64;
 
+// Talvez seja desnecessário, mas vou deixar aqui como referência
 const hashOptions =  {
     timeCost: 4,
     memoryCost: 2 ** 13,
@@ -53,6 +54,20 @@ async function loginUsuario(email, senha) {
     }
 }
 
-async function recuperarSenha(req, res) {}
+async function mudarSenha(id_usuario, novaSenha) {
+    const novoSalt = gerarSalt();
+    const hashSenha = hashSenha(usuario.senha, novoSalt);
+
+    let usuario = db.Usuario.findByPk(id_usuario);
+    usuario.set({
+        salt: novoSalt,
+        senha: hashSenha,
+    });
+    usuario.save();
+}
+
+async function recuperarSenha(req, res) {
+    // TODO
+}
 
 
