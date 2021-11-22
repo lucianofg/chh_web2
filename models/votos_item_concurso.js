@@ -3,7 +3,7 @@
  * um determinado concurso
  */
 const Sequelize = require('sequelize');
-const db = require('../config/sequelize_postgres')
+const schema = require('../config/sequelize_postgres')
 const Item = require('./item');
 const Concurso = require('./concurso');
 
@@ -15,7 +15,7 @@ const ModeloVotosItemConcurso = {
     }
 }
 
-const VotosItemConcurso = db.sequelize.define(
+const VotosItemConcurso = schema.define(
     'votacao',
     ModeloVotosItemConcurso,
     {underscored: true},
@@ -24,4 +24,4 @@ const VotosItemConcurso = db.sequelize.define(
 VotosItemConcurso.belongsTo(Item);
 VotosItemConcurso.belongsTo(Concurso);
 
-module.exports = {VotosItemConcurso};
+module.exports = VotosItemConcurso;

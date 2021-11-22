@@ -3,7 +3,7 @@
  * familiares, colaboradores e administradores
  */
 const Sequelize = require('sequelize');
-const db = require('../config/sequelize_postgres')
+const schema = require('../config/sequelize_postgres')
 
 const ModeloUsuario = {
     id: {
@@ -33,11 +33,11 @@ const ModeloUsuario = {
     }
 };
 
-const Usuario = db.sequelize.define(
+const Usuario = schema.define(
     'usuario',
     ModeloUsuario,
     {underscored: true},
 )
 
-module.exports = {Usuario};
+module.exports = Usuario;
 

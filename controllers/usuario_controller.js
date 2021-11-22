@@ -1,15 +1,7 @@
-const Usuario = require('../config/sequelize_postgres');
-const argon = require('argon2');
+const db = require('../config/db');
+const argon = require('argon2'); // função de hash
 const crypto = require('crypto');
 const TAMANHO_SALT = 64;
-
-// Talvez seja desnecessário, mas vou deixar aqui como referência
-const hashOptions =  {
-    timeCost: 4,
-    memoryCost: 2 ** 13,
-    parallelism: 2,
-    type: argon.argon2d,
-}
 
 function gerarSalt() {
     return crypto.randomBytes(Math.ceil(TAMANHO_SALT / 2))
@@ -25,7 +17,9 @@ function hashSenha(senha, salt) {
     return argon.hash(senha + salt)
 }
 
-async function criarUsuario(usuario) {
+async function postCriarUsuario(req, res) {
+    const usuario = req.body;
+
     const novoSalt = gerarSalt();
     const hashSenha = hashSenha(usuario.senha, novoSalt);
 
@@ -37,12 +31,22 @@ async function criarUsuario(usuario) {
         email: usuario.email,
         eAtivo: usuario.eAtivo,
         eAdmin: usuario.eAdmin,
+    }).then((item) => {
+        res.json({
+            "Message": "Usuario criado",
+            "Usuario": usuario.nome,
+        });
+    }).catch((error) => {
+        res.json({
+            "Message": "Erro na criação do usuário",
+            "Erro": error,
+        })
     });
-
-    // TODO: Decidir como prossegui em caso de erro ou sucesso
 }
 
-async function loginUsuario(email, senha) {
+async function postLoginUsuario(req, res) {
+    const email = req.body.email;
+    const senha = req.body.senha;
     const usuario = await db.Usuario.findOne({
         where: { email: email }
     });
@@ -52,6 +56,10 @@ async function loginUsuario(email, senha) {
     } else {
         // TODO: negar login
     }
+}
+
+async function getPaginaCadastro(req, res) {
+    res.render('usuario/usuarioCreate', {layout: 'noMenu.handlebars'})
 }
 
 async function mudarSenha(id_usuario, novaSenha) {
@@ -71,3 +79,7 @@ async function recuperarSenha(req, res) {
 }
 
 
+module.exports = {
+    getPaginaCadastro,
+    postCriarUsuario,
+}

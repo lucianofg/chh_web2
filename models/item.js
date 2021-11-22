@@ -3,7 +3,7 @@
  * concorrer a um concurso.
  */
 const Sequelize = require('sequelize');
-const db = require('../config/sequelize_postgres');
+const schema = require('../config/sequelize_postgres');
 
 const ModeloItem = {
     id: {
@@ -22,11 +22,11 @@ const ModeloItem = {
     },
 };
 
-const Item = db.sequelize.define(
+const Item = schema.define(
     'item',
     ModeloItem,
     {underscored: true},
 );
 
-module.exports = {Item};
+module.exports = Item;
 

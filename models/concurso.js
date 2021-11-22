@@ -2,7 +2,7 @@
  * Entidade que vai ser usada para o cadastro dos concursos
  */
 const Sequelize = require('sequelize');
-const db = require('../config/sequelize_postgres')
+const schema = require('../config/sequelize_postgres')
 
 const ModeloConcurso = {
     id: {
@@ -16,10 +16,10 @@ const ModeloConcurso = {
         premio: { type: Sequelize.TEXT, allowNull: false },
 }
 
-const Concurso = db.sequelize.define(
+const Concurso = schema.define(
     'concurso',
     ModeloConcurso,
     {underscored: true},
 );
 
-module.exports = {Concurso};
+module.exports = Concurso;
