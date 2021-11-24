@@ -1,24 +1,56 @@
-<!DOCTYPE html>
-<html>
+<div class="col-md-4 col-md-offset-4">
+    <form action="/criar_usuario" method="post">
+        <input type="hidden" name="id" value="{{usuario.id}}">
 
-<head> </head>
+        <div class="form-group">
+            <label for="inome">Nome</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="inome" 
+                name="nome" 
+                placeholder="O seu nome...">
+        </div>
 
-<body>
-    <form action="/usuarioCreate" method="post">
-        <label for="inome">Nome</label>
-        <input type="text" id="inome" name="nome" placeholder="O seu nome...">
+        <div class="form-group">
+            <label for="isobrenome">Sobrenome</label>
+            <input type="text" 
+                class="form-control" 
+                id="isobrenome" 
+                name="sobrenome" 
+                placeholder="O 
+                seu sobrenome...">
+        </div>
 
-        <label for="isobrenome">Sobrenome</label>
-        <input type="text" id="isobrenome" placeholder="O seu sobrenome...">
+        <div class="form-group">
+            <label for="iemail">Email</label>
+            <input type="email" 
+                class="form-control" 
+                id="iemail" 
+                name="email" 
+                placeholder="O 
+                seu email">
+        </div>
 
-        <label for="iemail">Email</label>
-        <input type="email" id="iemail" placeholder="O seu email">
+        <div class="form-group">
+            <label for="isenha">Senha</label>
+            <input type="password" 
+                class="form-control" 
+                id="isenha" 
+                name="senha" 
+                placeholder="A 
+                sua senha...">
+        </div>
 
-        <label for="isenha">Senha</label>
-        <input type="text" id="isenha" name="senha" placeholder="A sua senha...">
-
-        <label for="irepsenha">Repita a sua senha</label>
-        <input type="text" id="irepsenha" name="senha" placeholder="Repita a sua senha...">        
+        <div class="form-group">
+            <label for="irepsenha">Repita a sua senha</label>
+            <input type="password" 
+                class="form-control" 
+                id="irepsenha" 
+                name="repsenha" 
+                placeholder="Repita 
+                a sua senha...">        
+        </div>
+            <input class="btn btn-dark" type="submit" value="Cadastrar">
     </form>
-</body>
-</html>
+</div>

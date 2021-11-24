@@ -17,11 +17,10 @@ const ModeloVotosItemConcurso = {
 
 const VotosItemConcurso = schema.define(
     'votacao',
-    ModeloVotosItemConcurso,
-    {underscored: true},
+    ModeloVotosItemConcurso, { underscored: true },
 );
 
-VotosItemConcurso.belongsTo(Item);
-VotosItemConcurso.belongsTo(Concurso);
+VotosItemConcurso.belongsTo(Item, { as: 'id_item' });
+VotosItemConcurso.belongsTo(Concurso, { as: 'id_concurso' });
 
 module.exports = VotosItemConcurso;

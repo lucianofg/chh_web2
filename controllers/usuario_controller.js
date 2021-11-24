@@ -13,20 +13,24 @@ function verificarHash(hash, senha, salt) {
     return argon.verify(hash, senha + salt);
 }
 
-function hashSenha(senha, salt) {
+async function hashSenha(senha, salt) {
     return argon.hash(senha + salt)
 }
 
-async function postCriarUsuario(req, res) {
+async function getUsuarioCreate(req, res) {
+    res.render('usuario/usuarioCreate', { layout: 'noMenu.handlebars' })
+}
+
+async function postUsuarioCreate(req, res) {
     const usuario = req.body;
 
     const novoSalt = gerarSalt();
-    const hashSenha = hashSenha(usuario.senha, novoSalt);
+    const novoHash = await hashSenha(usuario.senha, novoSalt);
 
     db.Usuario.create({
         nome: usuario.nome,
         sobrenome: usuario.sobrenome,
-        senha: hashSenha,
+        senha: novoHash,
         salt: novoSalt,
         email: usuario.email,
         eAtivo: usuario.eAtivo,
@@ -47,39 +51,44 @@ async function postCriarUsuario(req, res) {
 async function postLoginUsuario(req, res) {
     const email = req.body.email;
     const senha = req.body.senha;
-    const usuario = await db.Usuario.findOne({
+    db.Usuario.findOne({
         where: { email: email }
+    }).then(usuario => {
+        if (verificarHash(usuario.senha, senha, usuario.salt)) {
+            req.session.login = user.login;
+            res.redirect('/home')
+        } else {
+            // TODO talvez refazer essa parte
+            res.redirect('/');
+        }
+    }).catch(error => {
+        res.redirect('/');
     });
-
-    if (verificarHash(usuario.senha, senha, usuario.salt)) {
-        // TODO: Processiguir com o login
-    } else {
-        // TODO: negar login
-    }
 }
 
-async function getPaginaCadastro(req, res) {
-    res.render('usuario/usuarioCreate', {layout: 'noMenu.handlebars'})
+async function postusuarioLogout(req, res) {
+    req.session.destroy();
+    res.redirect('/');
 }
 
 async function mudarSenha(id_usuario, novaSenha) {
     const novoSalt = gerarSalt();
-    const hashSenha = hashSenha(usuario.senha, novoSalt);
+    const novoHash = hashSenha(usuario.senha, novoSalt);
 
     let usuario = db.Usuario.findByPk(id_usuario);
     usuario.set({
         salt: novoSalt,
-        senha: hashSenha,
+        senha: novoHash,
     });
     usuario.save();
 }
 
-async function recuperarSenha(req, res) {
-    // TODO
-}
-
 
 module.exports = {
-    getPaginaCadastro,
-    postCriarUsuario,
+    getUsuarioCreate,
+    postUsuarioCreate,
+    recuperarSenha,
+    mudarSenha,
+    postLoginUsuario,
+    postusuarioLogout,
 }
