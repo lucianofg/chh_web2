@@ -13,7 +13,7 @@ routes.post("/usuario/edit", usuarioController.postUsuarioEdit); // TODO
 routes.delete("/usuario/:id/delete/", usuarioController.deleteUsuario); //TODO
 routes.post("/usuario/:id/disable", usuario.postUsuarioDisable); //TODO
 routes.post("/usuario/login", usuarioController.postUsuarioLogin);
-routes.post("/usuario/logout", usuarioController.postusuarioLogout);
+routes.post("/usuario/logout", usuarioController.postUsuarioLogout);
 
 // Rotas relacionadas aos concursos
 routes.get('/concurso/view', concursoController.getListaConcursosView);
