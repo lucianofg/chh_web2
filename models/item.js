@@ -21,6 +21,11 @@ const ModeloItem = {
         type: Sequelize.STRING,
         allowNull: false
     },
+    numero_votos: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    }
 };
 
 const Item = schema.define(

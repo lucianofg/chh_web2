@@ -3,7 +3,6 @@ const express = require('express');
 const usuarioController = require('../controllers/usuario');
 const concursoController = require('../controllers/concurso');
 const itemController = require('../controllers/item');
-const vicController = require('../controllers/votos_item_concurso');
 
 const routes = express.Router();
 
@@ -37,9 +36,9 @@ routes.post('/concurso/:id_concurso/item/edit', itemController.postItemEdit);
 routes.delete('/concurso/:id_concurso/item/:id_item/delete', itemController.deleteItem);
 
 // Rotas relacionadas as votações
-routes.get('/concurso/:id_concurso/item/view', vicController.getListaItensComVotos);
-routes.get('/concurso/:id_concurso/item/:id_item/view', vicController.getVotosItemConcurso);
-routes.post('/concurso/:id_concurso/item/votar', vicController.postVotarItemConcurso);
+routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensComVotos);
+routes.get('/concurso/:id_concurso/item/:id_item/view', itemController.getVotosItemConcurso);
+routes.post('/concurso/:id_concurso/item/votar', itemController.postVotarItemConcurso);
 
 
 
