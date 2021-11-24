@@ -1,5 +1,9 @@
 const db = require('../config/db');
 
+async function getConcursoResultado(req, res) {
+
+}
+
 async function getListaConcursosView(req, res) {
     db.Concurso.findAll()
         .then(concursos => {

@@ -12,14 +12,19 @@ const ModeloUsuario = {
         allowNull: false,
         primaryKey: true
     },
-    nome: {type: Sequelize.STRING, allowNull: false},
-    sobrenome: {type: Sequelize.STRING, allowNull: false},
-    senha: {type: Sequelize.STRING, allowNull: false},
-    salt: {type: Sequelize.STRING, allowNull: false},
+    nome: { type: Sequelize.STRING, allowNull: false },
+    sobrenome: { type: Sequelize.STRING, allowNull: false },
+    senha: { type: Sequelize.STRING, allowNull: false },
+    salt: { type: Sequelize.STRING, allowNull: false },
     email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
+    },
+    eColaborador: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
     },
     eAtivo: {
         type: Sequelize.BOOLEAN,
@@ -34,10 +39,7 @@ const ModeloUsuario = {
 };
 
 const Usuario = schema.define(
-    'usuario',
-    ModeloUsuario,
-    {underscored: true},
+    'usuario', ModeloUsuario, { underscored: true },
 )
 
 module.exports = Usuario;
-
