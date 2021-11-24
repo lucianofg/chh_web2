@@ -3,8 +3,14 @@ const express = require('express');
 const usuarioController = require('../controllers/usuario');
 const concursoController = require('../controllers/concurso');
 const itemController = require('../controllers/item');
+const generalController = require('../controllers/geral');
 
 const routes = express.Router();
+
+// Rotas gerais
+routes.get('/', generalController.getRoot);
+routes.get('/home', generalController.getHome);
+routes.get('/admin', generalController.getAdmin);
 
 // Rotas relacionadas ao usuário
 routes.get("/usuario/create", usuarioController.getUsuarioCreate);

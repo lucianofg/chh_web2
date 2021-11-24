@@ -71,7 +71,7 @@ async function postUsuarioLogin(req, res) {
         where: { email: email }
     }).then(usuario => {
         if (verificarHash(usuario.senha, senha, usuario.salt)) {
-            req.session.login = user.login;
+            req.session.email = user.email;
             res.redirect('/home')
         } else {
             // TODO talvez refazer essa parte
@@ -87,18 +87,6 @@ async function postUsuarioLogout(req, res) {
     res.redirect('/');
 }
 
-async function mudarSenha(id_usuario, novaSenha) {
-    const novoSalt = gerarSalt();
-    const novoHash = hashSenha(usuario.senha, novoSalt);
-
-    let usuario = db.Usuario.findByPk(id_usuario);
-    usuario.set({
-        salt: novoSalt,
-        senha: novoHash,
-    });
-    usuario.save();
-}
-
 
 module.exports = {
     getUsuarioCreate,
@@ -110,4 +98,3 @@ module.exports = {
     postUsuarioLogin,
     postUsuarioLogout,
 }
-

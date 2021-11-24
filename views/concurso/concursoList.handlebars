@@ -1,0 +1,24 @@
+<h1> Lista de todos os Concursos</h1>
+<h1>Nome do Concurso:</h1>
+<table  class="table table-hover table-striped">
+<thead  class="bg-primary">
+    <tr>
+        <th scope="col">Nome </th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Prêmio</th>
+        <th scope="col">Prazo de envios</th>
+        <th scope="col">Divilgação de resultados</th>
+    </tr>
+</thead>
+<tbody>
+    {{#each concursos}}
+    <tr>
+        <th scope="row">{{nome}}</th>
+        <td>{{descricao}}</td>
+        <td>{{Prêmio}}</td>
+        <td>{{prazoEnvioitem}}/td>
+        <td>{{dataDivilgacaoResultado}}/td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>

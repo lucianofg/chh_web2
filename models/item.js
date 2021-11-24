@@ -13,8 +13,12 @@ const ModeloItem = {
         allowNull: false,
         primaryKey: true
     },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     tipo_item: {
-        type: Sequelize.CHAR(1),
+        type: Sequelize.STRING,
         allowNull: false,
     },
     link_item: {

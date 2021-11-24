@@ -6,12 +6,12 @@ async function getListaItensView(req, res) {
 
 async function getItemView(req, res) {
     res.render('item/itemView', { layout: 'main.handlebars' })
-
 }
 async function getItemCreate(req, res) {
     res.render('item/itemCreate', { layout: 'main.handlebars' })
 }
 async function postItemCreate(req, res) {
+
 
 }
 
