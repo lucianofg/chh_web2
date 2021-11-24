@@ -48,7 +48,23 @@ async function postUsuarioCreate(req, res) {
     });
 }
 
-async function postLoginUsuario(req, res) {
+async function getUsuarioEdit(req, res) {
+
+}
+
+async function postUsuarioEdit(req, res) {
+
+}
+
+async function deleteUsuario(req, res) {
+
+}
+
+async function postUsuarioDisable(req, res) {
+
+}
+
+async function postUsuarioLogin(req, res) {
     const email = req.body.email;
     const senha = req.body.senha;
     db.Usuario.findOne({
@@ -66,7 +82,7 @@ async function postLoginUsuario(req, res) {
     });
 }
 
-async function postusuarioLogout(req, res) {
+async function postUsuarioLogout(req, res) {
     req.session.destroy();
     res.redirect('/');
 }
@@ -87,8 +103,11 @@ async function mudarSenha(id_usuario, novaSenha) {
 module.exports = {
     getUsuarioCreate,
     postUsuarioCreate,
-    recuperarSenha,
-    mudarSenha,
-    postLoginUsuario,
-    postusuarioLogout,
+    getUsuarioEdit, //TODO
+    postUsuarioEdit, // TODO
+    deleteUsuario, //TODO
+    postUsuarioDisable, //TODO
+    postUsuarioLogin,
+    postUsuarioLogout,
 }
+

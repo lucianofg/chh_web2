@@ -25,6 +25,7 @@ routes.post('/concurso/edit', concursoController.postConcursoEdit);
 routes.delete('/concurso/:id/delete', concursoController.deleteConcurso);
 
 // Rotas relacionadas aos itens de um concurso
+routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensView);
 routes.get('/concurso/:id_concurso/item/:id_item/view', itemController.getItemView);
 routes.get('/concurso/:id_concurso/item/create', itemController.getItemCreate);
 routes.post('/concurso/:id_concurso/item/create', itemController.postItemCreate);
@@ -33,7 +34,7 @@ routes.post('/concurso/:id_concurso/item/edit', itemController.postItemEdit);
 routes.delete('/concurso/:id_concurso/item/:id_item/delete', itemController.deleteItem);
 
 // Rotas relacionadas as votações
-
+routes.get('/concurso/:id_concurso/item')
 
 
 module.exports = routes;

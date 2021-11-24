@@ -1,5 +1,9 @@
 const db = require('../config/db');
 
+async function getListaItensView(req, res) {
+
+}
+
 async function getItemView(req, res) {
     res.render('item/itemView', { layout: 'main.handlebars' })
 
@@ -34,3 +38,13 @@ async function deleteItem(req, res) {
 
 
 }
+
+module.exports = {
+    getListaItensView,
+    getItemView,
+    getItemCreate,
+    postItemCreate,
+    getItemEdit,
+    postItemEdit,
+    deleteItem,
+};
