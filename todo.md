@@ -1,6 +1,8 @@
 # checklist
 - [ ] Configurar o multer para  o upload de arquivos
 - [ ] Decidir qual vai ser o meio de autenticação
+    - [ ] Se for pelo middleware mesmo, refazer de forma que o admin veja tudo e o usuário não veja as coisas do admin
+    - [ ] Ou então procurar um framework de autenticação
 - [x] models -> 
     - [x] Por enquanto só três: usuário, concurso e item
     - [x] Talvez criar nova entidade para tratar os uploads -> Eu acho que não vai ser necessário
@@ -37,9 +39,9 @@
         - [ ] getVotosItemConcurso
         - [ ] postVotarItemConcurso
     - [ ] Controller geral
-        - [ ] getRoot -> pagina nenhum usuário logado
-        - [ ] getHome -> pagina usuario logado
-        - [ ] getAdmin -> pagina admin logado
+        - [x] getRoot -> pagina nenhum usuário logado
+        - [x] getHome -> pagina usuario logado
+        - [x] getAdmin -> pagina admin logado
 - [ ] Views
     - [ ] homepage do usuário, com link para login e cadastro de usuário
     - [x] página root (tem que iterar para saber o que vai ser essa página)
