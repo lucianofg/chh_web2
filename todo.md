@@ -1,20 +1,54 @@
 # checklist
-- [-] models -> 
+- [ ] Configurar o multer para  o upload de arquivos
+- [ ] Decidir qual vai ser o meio de autenticação
+- [x] models -> 
     - [x] Por enquanto só três: usuário, concurso e item
-    - [ ] Talvez criar nova entidade para tratar os uploads
+    - [x] Talvez criar nova entidade para tratar os uploads -> Eu acho que não vai ser necessário
 - [ ] Controllers
     - [ ] Controller usuário
+        - [x] Funções de senha (geralSalt, hashSenha e verificarHash)
+        - [x] getUsuarioCreate 
+        - [x] postUsuarioCreate 
+        - [ ] getUsuarioEdit
+        - [ ] postUsuarioEdit
+        - [ ] getUsuarioDelete
+        - [ ] getUsuarioDisable
+        - [ ] getUsuarioLogin
+        - [x] postUsuarioLogin
+        - [x] postUsuarioLogout
     - [ ] Controller concurso
+        - [ ] getConcursoResultado
+        - [ ] getListaConcursosView
+        - [ ] getConcursoView
+        - [x] getConcursoCreate
+        - [ ] postConcursoCreate
+        - [ ] getConcursoEdit
+        - [ ] postConcursoEdit
+        - [ ] getConcursoDelete
     - [ ] Controller item
+        - [ ] getListaItensView
+        - [ ] getItemView
+        - [ ] getItemCreate
+        - [ ] postItemCreate
+        - [x] getItemEdit
+        - [ ] postItemEdit
+        - [ ] getItemDelete
+        - [ ] getListaItensComVotos
+        - [ ] getVotosItemConcurso
+        - [ ] postVotarItemConcurso
     - [ ] Controller geral
+        - [ ] getRoot -> pagina nenhum usuário logado
+        - [ ] getHome -> pagina usuario logado
+        - [ ] getAdmin -> pagina admin logado
 - [ ] Views
     - [ ] homepage do usuário, com link para login e cadastro de usuário
-    - [ ] página root (tem que iterar para saber o que vai ser essa página)
+    - [x] página root (tem que iterar para saber o que vai ser essa página)
     - [ ] página de adminstrador
+    - [x] Página de erro 404 -> 404_not_found
     - [ ] Views usuário
-        - [ ] usuarioCreate -> view do usuário
-        - [ ] usuarioEdit -> view de edição do administrador
-        - [ ] usuarioEdit -> view de edição do próprio usuário
+        - [x] usuarioCreate -> view do usuário
+        - [x] usuarioEdit -> view de edição do administrador
+        - [x] usuarioEdit -> view de edição do próprio usuário
         - [ ] usuarioList -> view do administrador
         - [ ] usuarioLogin
         - [ ] usuarioLogin erro de autenticação
