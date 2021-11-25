@@ -1,0 +1,49 @@
+<div class="col-md-4 col-md-offset-4">
+    <form action="/concurso/create" method="post">
+        <div class="form-group">
+            <label for="inome">Nome</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="inome" 
+                name="nome" 
+                placeholder="O nome do concurso">
+        </div>
+
+        <div class="form-group">
+            <label for="idescricao">Descrição</label>
+            <input type="text" 
+                class="form-control" 
+                id="idescricao" 
+                name="descricao" 
+                placeholder="Descrição do concurso">
+        </div>
+
+        <div class="form-group">
+            <label for="ipremio">Prêmio</label>
+            <input type="text" 
+                class="form-control" 
+                id="ipremio" 
+                name="premio" 
+                placeholder="O prêmio do concurso">
+        </div>
+
+        <div class="form-group">
+            <label for="iprazoenvio">Prazo de envio de itens para concorrer</label>
+            <input type="date" 
+                class="form-control" 
+                id="iprazoenvio" 
+                name="prazoEnvioItem">
+        </div>
+
+        <div class="form-group">
+            <label for="idatadivulgacao">Data de divulgação de resultados</label>
+            <input type="date" 
+                class="form-control" 
+                id="idatadivulgacao" 
+                name="dataDivulgacaoResultado">
+        </div>
+
+        <input id="icadastrar" class="btn btn-success" type="submit" value="Cadastrar">
+    </form>
+</div>

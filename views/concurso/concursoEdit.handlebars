@@ -1,0 +1,53 @@
+<div class="col-md-4 col-md-offset-4">
+    <form action="/concurso/edit" method="post">
+        <input type="hidden" name="id" value="{{usuario.id}}">
+        <div class="form-group">
+            <label for="inome">Nome</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="inome" 
+                name="nome" 
+                value="{{concurso.nome}}">
+        </div>
+
+        <div class="form-group">
+            <label for="idescricao">Descrição</label>
+            <input type="text" 
+                class="form-control" 
+                id="idescricao" 
+                name="descricao" 
+                value="{{concurso.descricao}}">
+        </div>
+
+        <div class="form-group">
+            <label for="ipremio">Prêmio</label>
+            <input type="text" 
+                class="form-control" 
+                id="ipremio" 
+                name="premio" 
+                value="{{concurso.premio}}">
+        </div>
+
+        <div class="form-group">
+            <label for="iprazoenvio">Senha</label>
+            <input type="date" 
+                class="form-control" 
+                id="iprazoenvio" 
+                name="prazoEnvioItem" 
+                value="{{concurso.prazoEnvioItem}}">
+        </div>
+
+        <div class="form-group">
+            <label for="idatadivulgacao">Repita a sua senha</label>
+            <input type="date" 
+                class="form-control" 
+                id="idatadivulgacao" 
+                name="dataDivulgacaoResultado"
+                value="{{concurso.dataDivulgacaoResultado}}">
+        </div>
+
+        <input class="btn btn-warning" type="reset" value="Reverter modificações">
+        <input class="btn btn-success" type="submit" value="Salvar">
+    </form>
+</div>

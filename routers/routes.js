@@ -18,7 +18,8 @@ routes.post("/usuario/create", usuarioController.postUsuarioCreate);
 routes.get("/usuario/:id/edit/", usuarioController.getUsuarioEdit);
 routes.post("/usuario/edit", usuarioController.postUsuarioEdit);
 routes.get("/usuario/:id/delete/", usuarioController.getUsuarioDelete);
-routes.get("/usuario/:id/disable", usuario.getUsuarioDisable);
+routes.get("/usuario/:id/disable", usuarioController.getUsuarioDisable);
+routes.get("/usuario/login", usuarioController.getUsuarioLogin);
 routes.post("/usuario/login", usuarioController.postUsuarioLogin);
 routes.post("/usuario/logout", usuarioController.postUsuarioLogout);
 

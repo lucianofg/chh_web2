@@ -65,7 +65,7 @@ async function getUsuarioDisable(req, res) {
 }
 
 async function getUsuarioLogin(req, res) {
-
+    res.render('usuario/usuarioLogin', { layout: 'noMenu.handlebars' });
 }
 
 async function postUsuarioLogin(req, res) {

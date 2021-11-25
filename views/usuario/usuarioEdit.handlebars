@@ -7,7 +7,7 @@
                 class="form-control" 
                 id="inome" 
                 name="nome" 
-                value={{usuario.nome}}>
+                value="{{usuario.nome}}">
         </div>
 
         <div class="form-group">
@@ -16,7 +16,7 @@
                 class="form-control" 
                 id="isobrenome" 
                 name="sobrenome" 
-                value={{usuario.sobrenome}}>
+                value="{{usuario.sobrenome}}">
         </div>
 
         <div class="form-group">
@@ -25,7 +25,7 @@
                 class="form-control" 
                 id="iemail" 
                 name="email" 
-                value={{usuario.email}}>
+                value="{{usuario.email}}">
         </div>
 
         <div class="form-group">
@@ -34,7 +34,7 @@
                 class="form-control" 
                 id="isenha" 
                 name="senha" 
-                value={{usuario.senha}}>
+                value="{{usuario.senha}}">
         </div>
 
         <div class="form-group">
@@ -43,9 +43,12 @@
                 class="form-control" 
                 id="irepsenha" 
                 name="repsenha" 
-                value={{usuario.}}>        
+                value="{{usuario.senha}}>       " 
+            <span id='irepsenha_mensagem'></span> 
         </div>
 
+        <input class="btn btn-warning" type="reset" value="Reverter modificações">
         <input class="btn btn-dark" type="submit" value="Cadastrar">
     </form>
 </div>
+<script src="../js/index.js"></script>

@@ -43,22 +43,24 @@
         - [x] getHome -> pagina usuario logado
         - [x] getAdmin -> pagina admin logado
 - [ ] Views
+    - [ ] layout para as páginas do admin
+    - [ ] layout para as páginass do usuário
     - [ ] homepage do usuário, com link para login e cadastro de usuário
     - [x] página root (tem que iterar para saber o que vai ser essa página)
     - [ ] página de adminstrador
     - [x] Página de erro 404 -> 404_not_found
-    - [ ] Views usuário
+    - [x] Views usuário
         - [x] usuarioCreate -> view do usuário
         - [x] usuarioEdit -> view de edição do administrador
         - [x] usuarioEdit -> view de edição do próprio usuário
-        - [ ] usuarioList -> view do administrador
-        - [ ] usuarioLogin
-        - [ ] usuarioLogin erro de autenticação
-        - [ ] usuarioLogout
-        - [ ] usuarioDesabilitadoComSucesso
-        - [ ] usuarioDeletadoComSucesso
+        - [x] usuarioList -> view do administrador
+        - [x] usuarioLogin
+        - [x] usuarioLogin erro de autenticação
+        - [x] usuarioLogout
+        - [ ] usuarioDesabilitadoComSucesso -> talvez fazer só um alert
+        - [ ] usuarioDeletadoComSucesso ->  talvez fazer só um alert
     - [ ] Views concurso
-        - [ ] concursoCreate
+        - [x] concursoCreate
         - [ ] concursoEdit
         - [ ] concursoDeletadoComSucesso
         - [ ] concursoList -> visão de admin
@@ -79,3 +81,4 @@
     que não é achado um usuário válido
 - [ ] Checar no cliente se as duas entradas de senha são as mesmas
 - [ ] Checar redirect no caso de votação
+- [ ] Adicionar opção de voltar em páginas sem menu

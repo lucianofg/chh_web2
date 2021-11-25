@@ -19,10 +19,11 @@
         <td>{{nome}}</td>
         <td>{{sobrenome}}</td>
         <td>
-            {{if eColaborador}}
+            {{#if eColaborador}}
                 <input type="checkbox" disabled="true" checked>
             {{else}}
                 <input type="checkbox" disabled="true">
+            {{/if}}
         </td>
         <td>
             {{#if eAdmin}}
