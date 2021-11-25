@@ -56,11 +56,15 @@ async function postUsuarioEdit(req, res) {
 
 }
 
-async function deleteUsuario(req, res) {
+async function getUsuarioDelete(req, res) {
 
 }
 
-async function postUsuarioDisable(req, res) {
+async function getUsuarioDisable(req, res) {
+
+}
+
+async function getUsuarioLogin(req, res) {
 
 }
 
@@ -74,7 +78,6 @@ async function postUsuarioLogin(req, res) {
             req.session.email = user.email;
             res.redirect('/home')
         } else {
-            // TODO talvez refazer essa parte
             res.redirect('/');
         }
     }).catch(error => {
@@ -91,10 +94,11 @@ async function postUsuarioLogout(req, res) {
 module.exports = {
     getUsuarioCreate,
     postUsuarioCreate,
-    getUsuarioEdit, //TODO
-    postUsuarioEdit, // TODO
-    deleteUsuario, //TODO
-    postUsuarioDisable, //TODO
+    getUsuarioEdit,
+    postUsuarioEdit,
+    getUsuarioDelete,
+    getUsuarioDisable,
+    getUsuarioLogin,
     postUsuarioLogin,
     postUsuarioLogout,
 }

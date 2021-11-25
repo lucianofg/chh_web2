@@ -34,7 +34,7 @@ async function postItemEdit(req, res) {
 
 }
 
-async function deleteItem(req, res) {
+async function getItemDelete(req, res) {
 
 
 }
@@ -72,7 +72,7 @@ module.exports = {
     postItemCreate,
     getItemEdit,
     postItemEdit,
-    deleteItem,
+    getItemDelete,
     getListaItensComVotos,
     getVotosItemConcurso,
     postVotarItemConcurso,

@@ -41,17 +41,18 @@ async function postConcursoEdit(req, res) {
 
 }
 
-async function deleteConcurso(req, res) {
+async function getConcursoDelete(req, res) {
 
 }
 
 
 module.exports = {
+    getConcursoResultado,
     getListaConcursosView,
     getConcursoView,
     getConcursoCreate,
     postConcursoCreate,
     getConcursoEdit,
     postConcursoEdit,
-    deleteConcurso,
+    getConcursoDelete,
 };
