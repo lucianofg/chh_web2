@@ -1,6 +1,6 @@
 <div class="col-md-4 col-md-offset-4">
     <form action="/usuario/edit" method="post">
-        <input type="hidden" name="id" value="{{usuario.id}}">
+
         <div class="form-group">
             <label for="inome">Nome</label>
             <input type="text" 
@@ -37,6 +37,7 @@
                 value={{usuario.senha}}>
         </div>
 
+        <!--
         <div class="form-group">
             <label for="irepsenha">Repita a sua senha</label>
             <input type="password" 
@@ -45,6 +46,7 @@
                 name="repsenha" 
                 value={{usuario.}}>        
         </div>
+        -->
 
         <input class="btn btn-dark" type="submit" value="Cadastrar">
     </form>

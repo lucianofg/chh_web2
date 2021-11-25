@@ -1,0 +1,41 @@
+<h1> Listar Receitas </h1>
+<table  class="table table-striped">
+<thead  class="bg-primary">
+    <tr>
+        <th scope="col">email</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Sobrenome</th>
+        <th scope="col">É colaborador</th>
+        <th scope="col">É ativo</th>
+        <th scope="col">É administrador</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Deletar</th>
+    </tr>
+</thead>
+<tbody>
+    {{#each usuarios}}
+    <tr>
+        <th scope="row">{{email}}</th>
+        <td>{{nome}}</td>
+        <td>{{sobrenome}}</td>
+        <td>
+            {{if eColaborador}}
+                <input type="checkbox" disabled="true" checked>
+            {{else}}
+                <input type="checkbox" disabled="true">
+        </td>
+        <td>
+            {{#if eAdmin}}
+                <input type="checkbox" disabled="true" checked>
+            {{else}}
+                <input type="checkbox" disabled="true">
+            {{/if}}
+        </td>
+
+        <td><a href="/usuario/{{_id}}/edit"> <button class="btn btn-primary">Editar</button> </a></td>
+        <td><a href="/usuario/{{_id}}/disable"> <button class="btn btn-warning">Desabilitar</button> </a></td>
+        <td><a href="/usuario/{{_id}}/delete"> <button class="btn btn-danger">Deletar</button> </a></td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>
