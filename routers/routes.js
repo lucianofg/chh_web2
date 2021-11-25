@@ -34,13 +34,13 @@ routes.post('/concurso/edit', concursoController.postConcursoEdit);
 routes.get('/concurso/:id/delete', concursoController.getConcursoDelete);
 
 // Rotas relacionadas aos itens de um concurso
-routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensView);
-routes.get('/concurso/:id_concurso/item/:id_item/view', itemController.getItemView);
-routes.get('/concurso/:id_concurso/item/create', itemController.getItemCreate);
-routes.post('/concurso/:id_concurso/item/create', itemController.postItemCreate);
-routes.get('/concurso/:id_concurso/item/:id_item/edit', itemController.getItemEdit);
-routes.post('/concurso/:id_concurso/item/edit', itemController.postItemEdit);
-routes.get('/concurso/:id_concurso/item/:id_item/delete', itemController.getItemDelete);
+routes.get('/item/view', itemController.getListaItensView);
+routes.get('/item/:id_item/view', itemController.getItemView);
+routes.get('/item/create', itemController.getItemCreate);
+routes.post('/item/create', itemController.postItemCreate);
+routes.get('/item/:id_item/edit', itemController.getItemEdit);
+routes.post('/item/edit', itemController.postItemEdit);
+routes.get('/item/:id_item/delete', itemController.getItemDelete);
 
 // Rotas relacionadas as votações
 routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensComVotos);

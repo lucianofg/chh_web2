@@ -49,19 +49,49 @@ async function postUsuarioCreate(req, res) {
 }
 
 async function getUsuarioEdit(req, res) {
-
+    await db.Usuario.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((usuario) => {
+        res.render('usuario/usuarioEdit', { usuario: usuario.toJSON() });
+    }).catch(err => {
+        res.render('erros/usuarioNaoAchado');
+    });
 }
 
 async function postUsuarioEdit(req, res) {
+    const novoSalt = gerarSalt();
+    const novoHash = await hashSenha(req.body.senha, novoSalt);
 
+    db.Usuario.findOne({
+        where: { id: req.body.id }
+    }).then(usuario => {
+        usuario.set({
+            nome: req.body.nome,
+            sobrenome: req.body.sobrenome,
+            senha: novoHash,
+            salt: novoSalt,
+            email: req.body.email,
+            eAtivo: req.body.eAtivo,
+            eColaborador: req.body.eColaborador,
+        });
+        await usuario.save();
+    });
+
+    res.redirect('/home');
 }
 
 async function getUsuarioDelete(req, res) {
-
+    db.Usuario.destroy({
+        where: {
+            id: req.params.id,
+        }
+    });
 }
 
 async function getUsuarioDisable(req, res) {
-
+    db.Usuario.update({ eAtivo: false }, { where: { id: req.params.id } })
 }
 
 async function getUsuarioLogin(req, res) {

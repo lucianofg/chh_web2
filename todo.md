@@ -11,10 +11,11 @@
         - [x] Funções de senha (geralSalt, hashSenha e verificarHash)
         - [x] getUsuarioCreate 
         - [x] postUsuarioCreate 
-        - [ ] getUsuarioEdit
-        - [ ] postUsuarioEdit
-        - [ ] getUsuarioDelete
-        - [ ] getUsuarioDisable
+        - [x] getUsuarioEdit -> isso fica como edição do admin eu acho melhor um endpoint..
+        - [ ] getUsuarioSelfEdit -> pro usuário editar seu próprio perfil
+        - [x] postUsuarioEdit
+        - [x] getUsuarioDelete
+        - [x] getUsuarioDisable
         - [ ] getUsuarioLogin
         - [x] postUsuarioLogin
         - [x] postUsuarioLogout
@@ -61,11 +62,11 @@
         - [ ] usuarioDeletadoComSucesso ->  talvez fazer só um alert
     - [ ] Views concurso
         - [x] concursoCreate
-        - [ ] concursoEdit
-        - [ ] concursoDeletadoComSucesso
-        - [ ] concursoList -> visão de admin
-        - [ ] concursoList -> visão de usuário
-        - [ ] concursoView -> visão de usuário da página de concurso
+        - [x] concursoEdit
+        - [ ] concursoDeletadoComSucesso -> talvez fazer só um alert
+        - [x] concursoList -> visão de admin
+        - [x] concursoList -> visão de usuário
+        - [x] concursoView -> visão de usuário da página de concurso
         - [ ] concursoResultado -> resultado do concurso, com ganhador e tudo
         - [ ] concursoItemView -> visão de usuário dos itens que estão concorrendo no concurso
     - [ ] Views de itens
@@ -82,3 +83,4 @@
 - [ ] Checar no cliente se as duas entradas de senha são as mesmas
 - [ ] Checar redirect no caso de votação
 - [ ] Adicionar opção de voltar em páginas sem menu
+- [ ] falha de segurança nos deletes do crud (basicamente tem que checar se o usuário pode fazer tal operação) ou então mudar para um post da vida.

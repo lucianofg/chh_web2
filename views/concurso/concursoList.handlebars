@@ -8,16 +8,24 @@
         <th scope="col">Prêmio</th>
         <th scope="col">Prazo de envios</th>
         <th scope="col">Divilgação de resultados</th>
+        {{#if usuario.eAdmin }}
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        {{/if}}
     </tr>
 </thead>
 <tbody>
     {{#each concursos}}
     <tr>
-        <th scope="row">{{nome}}</th>
+        <th scope="row"><a href="/concurso/{{id}}/view">{{nome}}</a></th>
         <td>{{descricao}}</td>
         <td>{{Prêmio}}</td>
         <td>{{prazoEnvioitem}}/td>
         <td>{{dataDivilgacaoResultado}}/td>
+        {{#if usuario.eAdmin }}
+            <td><a href="/concurso/{{id}}/edit"><button class="btn btn-primary">Editar</button></a></td>
+            <td><a href="/concurso/{{id}}/delete"><button class="btn btn-danger">Deletar</button></a></td>
+        {{/if}}
     </tr>
     {{/each}}
 </tbody>
