@@ -3,31 +3,35 @@
 - [ ] Decidir qual vai ser o meio de autenticação
     - [ ] Se for pelo middleware mesmo, refazer de forma que o admin veja tudo e o usuário não veja as coisas do admin
     - [ ] Ou então procurar um framework de autenticação
+
 - [x] models -> 
     - [x] Por enquanto só três: usuário, concurso e item
     - [x] Talvez criar nova entidade para tratar os uploads -> Eu acho que não vai ser necessário
+
 - [ ] Controllers
-    - [ ] Controller usuário
+    - [x] Controller usuário
         - [x] Funções de senha (geralSalt, hashSenha e verificarHash)
         - [x] getUsuarioCreate 
         - [x] postUsuarioCreate 
         - [x] getUsuarioEdit -> isso fica como edição do admin eu acho melhor um endpoint..
-        - [ ] getUsuarioSelfEdit -> pro usuário editar seu próprio perfil
+        - [x] getUsuarioSelfEdit -> pro usuário editar seu próprio perfil
         - [x] postUsuarioEdit
         - [x] getUsuarioDelete
         - [x] getUsuarioDisable
-        - [ ] getUsuarioLogin
+        - [x] getUsuarioLogin
         - [x] postUsuarioLogin
         - [x] postUsuarioLogout
+
     - [ ] Controller concurso
         - [ ] getConcursoResultado
-        - [ ] getListaConcursosView
-        - [ ] getConcursoView
+        - [x] getListaConcursosView
+        - [x] getConcursoView
         - [x] getConcursoCreate
-        - [ ] postConcursoCreate
-        - [ ] getConcursoEdit
-        - [ ] postConcursoEdit
-        - [ ] getConcursoDelete
+        - [x] postConcursoCreate
+        - [x] getConcursoEdit
+        - [x] postConcursoEdit
+        - [x] getConcursoDelete
+
     - [ ] Controller item
         - [ ] getListaItensView
         - [ ] getItemView
@@ -39,10 +43,12 @@
         - [ ] getListaItensComVotos
         - [ ] getVotosItemConcurso
         - [ ] postVotarItemConcurso
+
     - [ ] Controller geral
         - [x] getRoot -> pagina nenhum usuário logado
         - [x] getHome -> pagina usuario logado
         - [x] getAdmin -> pagina admin logado
+
 - [ ] Views
     - [ ] layout para as páginas do admin
     - [ ] layout para as páginass do usuário
@@ -50,6 +56,12 @@
     - [x] página root (tem que iterar para saber o que vai ser essa página)
     - [ ] página de adminstrador
     - [x] Página de erro 404 -> 404_not_found
+
+    - [ ] Views de erro
+        - [ ] usuarioNaoAchado
+        - [ ] cocursoNaoAchado
+        - [ ] itemNaoAchado
+
     - [x] Views usuário
         - [x] usuarioCreate -> view do usuário
         - [x] usuarioEdit -> view de edição do administrador
@@ -58,8 +70,7 @@
         - [x] usuarioLogin
         - [x] usuarioLogin erro de autenticação
         - [x] usuarioLogout
-        - [ ] usuarioDesabilitadoComSucesso -> talvez fazer só um alert
-        - [ ] usuarioDeletadoComSucesso ->  talvez fazer só um alert
+
     - [ ] Views concurso
         - [x] concursoCreate
         - [x] concursoEdit
@@ -69,6 +80,7 @@
         - [x] concursoView -> visão de usuário da página de concurso
         - [ ] concursoResultado -> resultado do concurso, com ganhador e tudo
         - [ ] concursoItemView -> visão de usuário dos itens que estão concorrendo no concurso
+
     - [ ] Views de itens
         - [ ] itemCreate -> visão de usuário
         - [ ] itemEdit -> visão de usuário

@@ -16,6 +16,7 @@ routes.get('/admin', generalController.getAdmin);
 routes.get("/usuario/create", usuarioController.getUsuarioCreate);
 routes.post("/usuario/create", usuarioController.postUsuarioCreate);
 routes.get("/usuario/:id/edit/", usuarioController.getUsuarioEdit);
+routes.get("/usuario/edit", usuarioController.getUsuarioSelfEdit);
 routes.post("/usuario/edit", usuarioController.postUsuarioEdit);
 routes.get("/usuario/:id/delete/", usuarioController.getUsuarioDelete);
 routes.get("/usuario/:id/disable", usuarioController.getUsuarioDisable);

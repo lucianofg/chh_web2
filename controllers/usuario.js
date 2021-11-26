@@ -22,24 +22,22 @@ async function getUsuarioCreate(req, res) {
 }
 
 async function postUsuarioCreate(req, res) {
-    const usuario = req.body;
-
     const novoSalt = gerarSalt();
-    const novoHash = await hashSenha(usuario.senha, novoSalt);
+    const novoHash = await hashSenha(req.body.senha, novoSalt);
 
     db.Usuario.create({
-        nome: usuario.nome,
-        sobrenome: usuario.sobrenome,
+        nome: req.body.nome,
+        sobrenome: req.body.sobrenome,
         senha: novoHash,
         salt: novoSalt,
-        email: usuario.email,
-        eAtivo: usuario.eAtivo,
-        eAdmin: usuario.eAdmin,
-    }).then((item) => {
-        res.json({
-            "Message": "Usuario criado",
-            "Usuario": usuario.nome,
-        });
+        email: req.body.email,
+        eAtivo: req.body.eAtivo,
+        eAdmin: req.body.eAdmin,
+    }).then((usuario) => {
+        res.render('usuario/usuarioCriadoComSucesso', {
+            layout: 'main.handlebars',
+            usuario: usuario.nome,
+        })
     }).catch((error) => {
         res.json({
             "Message": "Erro na criação do usuário",
@@ -52,6 +50,18 @@ async function getUsuarioEdit(req, res) {
     await db.Usuario.findOne({
         where: {
             id: req.params.id
+        }
+    }).then((usuario) => {
+        res.render('usuario/usuarioEdit', { usuario: usuario.toJSON() });
+    }).catch(err => {
+        res.render('erros/usuarioNaoAchado');
+    });
+}
+
+async function getUsuarioSelfEdit(req, res) {
+    await db.Usuario.findOne({
+        where: {
+            id: req.session.id,
         }
     }).then((usuario) => {
         res.render('usuario/usuarioEdit', { usuario: usuario.toJSON() });
@@ -76,7 +86,7 @@ async function postUsuarioEdit(req, res) {
             eAtivo: req.body.eAtivo,
             eColaborador: req.body.eColaborador,
         });
-        await usuario.save();
+        usuario.save();
     });
 
     res.redirect('/home');
@@ -105,7 +115,8 @@ async function postUsuarioLogin(req, res) {
         where: { email: email }
     }).then(usuario => {
         if (verificarHash(usuario.senha, senha, usuario.salt)) {
-            req.session.email = user.email;
+            req.session.id_user = user.id;
+            req.session.eAdmin = user.eAdmin;
             res.redirect('/home')
         } else {
             res.redirect('/');
@@ -125,6 +136,7 @@ module.exports = {
     getUsuarioCreate,
     postUsuarioCreate,
     getUsuarioEdit,
+    getUsuarioSelfEdit,
     postUsuarioEdit,
     getUsuarioDelete,
     getUsuarioDisable,

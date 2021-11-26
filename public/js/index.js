@@ -9,3 +9,9 @@ $('#isenha, #irepsenha').on('keyup', function() {
         $('#icadastrar').prop("disabled", true);
     }
 });
+
+function deletarUsuario(id) {
+    $.get('/usuario/' + id + '/delete', (data, status) => {
+        alert(status);
+    })
+}

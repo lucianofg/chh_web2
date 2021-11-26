@@ -1,5 +1,7 @@
 <h1> Lista de todos os Concursos</h1>
 <h1>Nome do Concurso:</h1>
+
+{{#if (concursos != undefined}}
 <table  class="table table-hover table-striped">
 <thead  class="bg-primary">
     <tr>
@@ -30,3 +32,9 @@
     {{/each}}
 </tbody>
 </table>
+
+{{else}}
+    <h1>Erro na recuperação da lista</h1>
+    <pre>{{error}}</pre>
+{{/if}}
+

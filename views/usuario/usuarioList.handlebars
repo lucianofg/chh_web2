@@ -9,7 +9,6 @@
         <th scope="col">É ativo</th>
         <th scope="col">É administrador</th>
         <th scope="col">Editar</th>
-        <th scope="col">Desabilitar</th>
         <th scope="col">Deletar</th>
     </tr>
 </thead>
@@ -34,10 +33,18 @@
             {{/if}}
         </td>
 
-        <td><a href="/usuario/{{_id}}/edit"> <button class="btn btn-primary">Editar</button> </a></td>
-        <td><a href="/usuario/{{_id}}/disable"> <button class="btn btn-warning">Desabilitar</button> </a></td>
-        <td><a href="/usuario/{{_id}}/delete"> <button class="btn btn-danger">Deletar</button> </a></td>
+        <td>
+            <a href="/usuario/{{id}}/edit"> 
+                <button class="btn btn-primary">Editar</button> 
+            </a>
+        </td>
+        <td>
+            <a href="/usuario/{{id}}/delete"> 
+                <button class="btn btn-danger" onclick="deletarUsuario({{id}})">Deletar</button> 
+            </a>
+        </td>
     </tr>
     {{/each}}
 </tbody>
 </table>
+<script src="../js/index.js"></script>
