@@ -87,6 +87,10 @@ async function postUsuarioEdit(req, res) {
             eColaborador: req.body.eColaborador,
         });
         usuario.save();
+    }).catch(error => {
+        res.json({
+            error: error,
+        });
     });
 
     res.redirect('/home');
@@ -100,10 +104,6 @@ async function getUsuarioDelete(req, res) {
     });
 }
 
-async function getUsuarioDisable(req, res) {
-    db.Usuario.update({ eAtivo: false }, { where: { id: req.params.id } })
-}
-
 async function getUsuarioLogin(req, res) {
     res.render('usuario/usuarioLogin', { layout: 'noMenu.handlebars' });
 }
@@ -115,8 +115,8 @@ async function postUsuarioLogin(req, res) {
         where: { email: email }
     }).then(usuario => {
         if (verificarHash(usuario.senha, senha, usuario.salt)) {
-            req.session.id_user = user.id;
-            req.session.eAdmin = user.eAdmin;
+            req.session.id_usuario = usuario.id;
+            req.session.eAdmin = usuario.eAdmin;
             res.redirect('/home')
         } else {
             res.redirect('/');
@@ -131,6 +131,11 @@ async function postUsuarioLogout(req, res) {
     res.redirect('/');
 }
 
+async function getUsuarioList(req, res) {
+    res.json({
+        msg: "Em construção"
+    })
+}
 
 module.exports = {
     getUsuarioCreate,
@@ -139,8 +144,8 @@ module.exports = {
     getUsuarioSelfEdit,
     postUsuarioEdit,
     getUsuarioDelete,
-    getUsuarioDisable,
     getUsuarioLogin,
     postUsuarioLogin,
     postUsuarioLogout,
+    getUsuarioList,
 }

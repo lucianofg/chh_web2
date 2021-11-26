@@ -19,14 +19,14 @@ routes.get("/usuario/:id/edit/", usuarioController.getUsuarioEdit);
 routes.get("/usuario/edit", usuarioController.getUsuarioSelfEdit);
 routes.post("/usuario/edit", usuarioController.postUsuarioEdit);
 routes.get("/usuario/:id/delete/", usuarioController.getUsuarioDelete);
-routes.get("/usuario/:id/disable", usuarioController.getUsuarioDisable);
 routes.get("/usuario/login", usuarioController.getUsuarioLogin);
 routes.post("/usuario/login", usuarioController.postUsuarioLogin);
 routes.post("/usuario/logout", usuarioController.postUsuarioLogout);
+routes.get("/usuario/list", usuarioController.getUsuarioList);
 
 // Rotas relacionadas aos concursos
 routes.get('/concurso/resultado/view', concursoController.getConcursoResultado);
-routes.get('/concurso/view', concursoController.getListaConcursosView);
+routes.get('/concurso/list', concursoController.getListaConcursosView);
 routes.get('/concurso/:id/view', concursoController.getConcursoView);
 routes.get('/concurso/create', concursoController.getConcursoCreate);
 routes.post('/concurso/create', concursoController.postConcursoCreate);
@@ -35,7 +35,7 @@ routes.post('/concurso/edit', concursoController.postConcursoEdit);
 routes.get('/concurso/:id/delete', concursoController.getConcursoDelete);
 
 // Rotas relacionadas aos itens de um concurso
-routes.get('/item/view', itemController.getListaItensView);
+routes.get('/item/list', itemController.getListaItensView);
 routes.get('/item/:id_item/view', itemController.getItemView);
 routes.get('/item/create', itemController.getItemCreate);
 routes.post('/item/create', itemController.postItemCreate);

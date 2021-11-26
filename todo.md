@@ -1,8 +1,9 @@
 # checklist
 - [ ] Configurar o multer para  o upload de arquivos
-- [ ] Decidir qual vai ser o meio de autenticação
-    - [ ] Se for pelo middleware mesmo, refazer de forma que o admin veja tudo e o usuário não veja as coisas do admin
-    - [ ] Ou então procurar um framework de autenticação
+- [ ] Ver como recuperar o link do arquivo no controller do item
+- [x] Decidir qual vai ser o meio de autenticação
+- [ ] Configurar middleware de sessão para salvar o id do usuário e se
+    ele é admin (talvez o email dele também)
 
 - [x] models -> 
     - [x] Por enquanto só três: usuário, concurso e item
@@ -35,14 +36,14 @@
     - [ ] Controller item
         - [ ] getListaItensView
         - [ ] getItemView
-        - [ ] getItemCreate
-        - [ ] postItemCreate
+        - [x] getItemCreate
+        - [x] postItemCreate
         - [x] getItemEdit
-        - [ ] postItemEdit
+        - [x] postItemEdit
         - [ ] getItemDelete
         - [ ] getListaItensComVotos
         - [ ] getVotosItemConcurso
-        - [ ] postVotarItemConcurso
+        - [x] postVotarItemConcurso
 
     - [ ] Controller geral
         - [x] getRoot -> pagina nenhum usuário logado

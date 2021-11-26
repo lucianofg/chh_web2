@@ -8,6 +8,10 @@ async function getListaConcursosView(req, res) {
     db.Concurso.findAll().then(concursos => {
         res.render('concurso/concursoList', {
             concursos: concursos,
+            usuario: {
+                id: req.session.id_usario,
+                eAdmin: req.session.eAdmin,
+            },
             layout: 'main.handlebars' 
         });
     }).catch(error => {
@@ -27,6 +31,10 @@ async function getConcursoView(req, res) {
         res.render('concurso/concursoView', {
             layout: 'main.handlebars',
             concurso: concurso,
+            usuario: {
+                id: req.session.id_usario,
+                eAdmin: req.session.eAdmin,
+            },
         })
     }).catch(error => {
         res.render('concurso/concursoView', {
@@ -50,7 +58,11 @@ async function postConcursoCreate(req, res) {
     }).then(concurso => {
         res.render('concurso/concursoCriadoComSucesso', {
             layout: 'main.handlebars',
-            usuario: concurso.nome,
+            concurso: concurso.nome,
+            usuario: {
+                id: req.session.id_usario,
+                eAdmin: req.session.eAdmin,
+            },
         });
     }).catch(error => {
         res.json({
@@ -66,7 +78,13 @@ async function getConcursoEdit(req, res) {
             id: req.params.id
         }
     }).then((concurso) => {
-        res.render('concurso/concursoEdit', { concurso: concurso.toJSON() });
+        res.render('concurso/concursoEdit', { 
+            concurso: concurso.toJSON(),
+            usuario: {
+                id: req.session.id_usario,
+                eAdmin: req.session.eAdmin,
+            },
+        });
     }).catch(err => {
         res.render('erros/concursoNaoAchado');
     });
