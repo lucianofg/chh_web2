@@ -1,22 +1,31 @@
+{{#if usuario}}
 <div class="col-md-4 col-md-offset-4">
     <form action="/item/create" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{usuario.id}}">
 
         <div class="form-group">
             <label for="inome">Nome</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                id="inome" 
-                name="nome" 
-                placeholder="Nome do item">
+            <input type="text" 
+                   class="form-control" 
+                   id="inome" 
+                   name="nome" 
+                   placeholder="Nome do item">
         </div>
 
         <div class="form-group">
             <label for="iarquivo">Imagem</label>
-            <input type="file" class="form-control" id="iarquivo" name="arquivo">
+            <input type="file" 
+                   class="form-control" 
+                   id="iarquivo" 
+                   name="arquivo">
         </div>
 
-        <input id="icadastrar" class="btn btn-success" type="submit" value="Cadastrar">
+        <input id="icadastrar" 
+               class="btn btn-success" 
+               type="submit" 
+               value="Cadastrar">
     </form>
 </div>
+{{else}}
+    <h1>Acesso não autorizado</h1>
+{{/if}}

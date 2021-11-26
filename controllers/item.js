@@ -10,7 +10,7 @@ async function getItemView(req, res) {
     }).then(item => {
         res.render('item/itemView', { 
             layout: 'main.handlebars',
-            item: ,
+            item: item.toJSON(),
             usuario: {
                 id: req.session.id_usario,
                 eAdmin: req.session.eAdmin,
