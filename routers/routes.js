@@ -21,7 +21,7 @@ routes.post("/usuario/edit", usuarioController.postUsuarioEdit);
 routes.get("/usuario/:id/delete/", usuarioController.getUsuarioDelete);
 routes.get("/usuario/login", usuarioController.getUsuarioLogin);
 routes.post("/usuario/login", usuarioController.postUsuarioLogin);
-routes.post("/usuario/logout", usuarioController.postUsuarioLogout);
+routes.get("/usuario/logout", usuarioController.getUsuarioLogout);
 routes.get("/usuario/list", usuarioController.getUsuarioList);
 
 // Rotas relacionadas aos concursos

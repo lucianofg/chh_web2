@@ -126,7 +126,7 @@ async function postUsuarioLogin(req, res) {
     });
 }
 
-async function postUsuarioLogout(req, res) {
+async function getUsuarioLogout(req, res) {
     req.session.destroy();
     res.redirect('/');
 }
@@ -146,6 +146,6 @@ module.exports = {
     getUsuarioDelete,
     getUsuarioLogin,
     postUsuarioLogin,
-    postUsuarioLogout,
+    getUsuarioLogout,
     getUsuarioList,
 }
