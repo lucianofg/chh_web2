@@ -5,7 +5,9 @@ async function getConcursoResultado(req, res) {
 }
 
 async function getListaConcursosView(req, res) {
+    console.log("Aqui")
     db.Concurso.findAll().then(concursos => {
+        console.log('Concursos: ' + concursos)
         res.render('concurso/concursoList', {
             concursos: concursos,
             usuario: {
@@ -15,6 +17,7 @@ async function getListaConcursosView(req, res) {
             layout: 'main.handlebars' 
         });
     }).catch(error => {
+        console.log('Erro: ' + error)
         res.render('concurso/concursoList', {
             error: error,
             layout: 'main.handlebars',

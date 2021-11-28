@@ -1,5 +1,5 @@
 function logRegister(req, res, next) {
-    console.log(req.url + "\t" + req.method + "\t" + new Date());
+    console.log(`${new Date().toLocaleString()}\t${req.method}\t${req.url}`);
     next();
 }
 

@@ -1,11 +1,18 @@
-
 function sessionControl(req, res, next) {
-    if ((req.session.login != undefined)
+    /*
+    const paginas_publicas = [
+        '/',
+        '/usuario/login',
+        '/usuario/create',
+        '/concurso'
+    ]
+    if ((req.session.id_usuario != undefined)
         || (req.url == '/' && req.method == 'GET')
-        || (req.url == '/login' && req.method == 'POST')
-        || ((req.url).split('/')[1] == 'recuperarSenha')
+        || (paginas_publicas.includes(req.url))
     ) next(); 
     else res.redirect('/');
+    */
+    next();
 }
 
 module.exports = sessionControl;

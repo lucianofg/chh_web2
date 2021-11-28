@@ -9,8 +9,9 @@ function gerarSalt() {
         .slice(0, TAMANHO_SALT);
 }
 
-function verificarHash(hash, senha, salt) {
-    return argon.verify(hash, senha + salt);
+async function verificarHash(hash, senha, salt) {
+    console.log(hash, senha, salt)
+    return ;
 }
 
 async function hashSenha(senha, salt) {
@@ -35,13 +36,13 @@ async function postUsuarioCreate(req, res) {
         eAdmin: req.body.eAdmin,
     }).then((usuario) => {
         res.render('usuario/usuarioCriadoComSucesso', {
-            layout: 'main.handlebars',
+            layout: 'noMenu.handlebars',
             usuario: usuario.nome,
         })
     }).catch((error) => {
-        res.json({
-            "Message": "Erro na criação do usuário",
-            "Erro": error,
+        res.render('usuario/usuarioCriadoComSucesso', {
+            layout: 'noMenu.handlebars',
+            error: error,
         })
     });
 }
@@ -114,15 +115,21 @@ async function postUsuarioLogin(req, res) {
     db.Usuario.findOne({
         where: { email: email }
     }).then(usuario => {
-        if (verificarHash(usuario.senha, senha, usuario.salt)) {
-            req.session.id_usuario = usuario.id;
-            req.session.eAdmin = usuario.eAdmin;
-            res.redirect('/home')
-        } else {
-            res.redirect('/');
-        }
+        console.log(senha + email);
+        console.log(usuario);
+        argon.verify(usuario.senha, senha + usuario.salt)
+            .then(deu_certo => {
+                if (deu_certo) {
+                    req.session.id_usuario = usuario.id;
+                    req.session.nome = usuario.nome;
+                    req.session.eAdmin = usuario.eAdmin;
+                    res.redirect('/home')
+                } else {
+                    res.render('erros/usuarioNaoAchado')
+                }
+            });
     }).catch(error => {
-        res.redirect('/');
+        res.render('erros/usuarioNaoAchado', {error: error})
     });
 }
 
