@@ -1,25 +1,21 @@
 const db = require('../config/db');
+const { getUsuario } = require('./utils');
 
 async function getConcursoResultado(req, res) {
 
 }
 
 async function getListaConcursosView(req, res) {
-    console.log("Aqui")
     db.Concurso.findAll().then(concursos => {
-        console.log('Concursos: ' + concursos)
         res.render('concurso/concursoList', {
             concursos: concursos,
-            usuario: {
-                id: req.session.id_usario,
-                eAdmin: req.session.eAdmin,
-            },
+            usuario: getUsuario(req),
             layout: 'main.handlebars' 
         });
     }).catch(error => {
-        console.log('Erro: ' + error)
         res.render('concurso/concursoList', {
             error: error,
+            usuario: getUsuario(req),
             layout: 'main.handlebars',
         });
     });
@@ -34,14 +30,12 @@ async function getConcursoView(req, res) {
         res.render('concurso/concursoView', {
             layout: 'main.handlebars',
             concurso: concurso,
-            usuario: {
-                id: req.session.id_usario,
-                eAdmin: req.session.eAdmin,
-            },
-        })
+            usuario: getUsuario(req)
+        });
     }).catch(error => {
         res.render('concurso/concursoView', {
             layout: 'main.handlebars',
+            usuario: getUsuario(req),
             error: error
         });
     })
@@ -62,16 +56,14 @@ async function postConcursoCreate(req, res) {
         res.render('concurso/concursoCriadoComSucesso', {
             layout: 'main.handlebars',
             concurso: concurso.nome,
-            usuario: {
-                id: req.session.id_usario,
-                eAdmin: req.session.eAdmin,
-            },
+            usuario: getUsuario(req),
         });
     }).catch(error => {
-        res.json({
-            "Message": "Erro na criação do curso",
-            "Erro": error,
-        })
+        res.render('concurso/concursoCriadoComSucesso', {
+            error: error,
+            layout: 'main.handlebars',
+            usuario: getUsuario(req),
+        });
     });
 }
 
@@ -81,6 +73,7 @@ async function getConcursoEdit(req, res) {
             id: req.params.id
         }
     }).then((concurso) => {
+        if (concurso == null) throw new Error("Concurso não achado");
         res.render('concurso/concursoEdit', { 
             concurso: concurso.toJSON(),
             usuario: {
@@ -110,9 +103,11 @@ async function postConcursoEdit(req, res) {
 }
 
 async function getConcursoDelete(req, res) {
-    db.Usuario.destroy({
-        where: { id: req.params.id, }
-    });
+    if (req.session.eAdmin) {
+        db.Usuario.destroy({
+            where: { id: req.params.id, }
+        });
+    }
 }
 
 

@@ -40,13 +40,13 @@
                         Concursos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {{#if session.usuario.eAdmin}}
+                        {{#if usuario.eAdmin}}
                             <a class="dropdown-item" href="/concurso/create">Cadastrar novo concurso</a>
                         {{/if}}
                         <a class="dropdown-item" href="/concurso/list">Listar todos os concursos</a>
                     </div>
                 </li>
-                {{#if session.usuario.eAdmin}}
+                {{#if usuario.eAdmin}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
                            href="#"
@@ -63,7 +63,7 @@
                         </div>
                     </li>
                 {{/if}}
-                {{#if session.usuario}}
+                {{#if usuario}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
                            href="#"
@@ -81,7 +81,7 @@
                     </li>
 
                     <li class="nav-item">
-                        {{session.usuario.nome}}
+                        {{usuario.nome}}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/usuario/logout">Logout</a>

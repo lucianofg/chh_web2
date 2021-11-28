@@ -1,50 +1,56 @@
-<h1> Listar Receitas </h1>
-<table  class="table table-striped">
-<thead  class="bg-primary">
-    <tr>
-        <th scope="col">email</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">É colaborador</th>
-        <th scope="col">É ativo</th>
-        <th scope="col">É administrador</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Deletar</th>
-    </tr>
-</thead>
-<tbody>
-    {{#each usuarios}}
-    <tr>
-        <th scope="row">{{email}}</th>
-        <td>{{nome}}</td>
-        <td>{{sobrenome}}</td>
-        <td>
-            {{#if eColaborador}}
-                <input type="checkbox" disabled="true" checked>
-            {{else}}
-                <input type="checkbox" disabled="true">
-            {{/if}}
-        </td>
-        <td>
-            {{#if eAdmin}}
-                <input type="checkbox" disabled="true" checked>
-            {{else}}
-                <input type="checkbox" disabled="true">
-            {{/if}}
-        </td>
-
-        <td>
-            <a href="/usuario/{{id}}/edit"> 
-                <button class="btn btn-primary">Editar</button> 
-            </a>
-        </td>
-        <td>
-            <a href="/usuario/{{id}}/delete"> 
-                <button class="btn btn-danger" onclick="deletarUsuario({{id}})">Deletar</button> 
-            </a>
-        </td>
-    </tr>
-    {{/each}}
-</tbody>
-</table>
+<h1> Lista de usuário </h1>
+{{#if  usuario.eAdmin}}
+    <table  class="table table-striped">
+    <thead  class="bg-primary">
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">É colaborador</th>
+            <th scope="col">É administrador</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#unless listaUsuarios}}
+            <h1>lista vazia</h1>
+        {{/unless}}
+        {{#each listaUsuarios as | user |}}
+        <tr>
+            <th scope="row">{{user.email}}</th>
+            <td>{{user.nome}}</td>
+            <td>{{user.sobrenome}}</td>
+            <td>
+                {{#if user.eColaborador}}
+                    <input type="checkbox" disabled="true" checked>
+                {{else}}
+                    <input type="checkbox" disabled="true">
+                {{/if}}
+            </td>
+            <td>
+                {{#if user.eAdmin}}
+                    <input type="checkbox" disabled="true" checked>
+                {{else}}
+                    <input type="checkbox" disabled="true">
+                {{/if}}
+            </td>
+    
+            <td>
+                <a href="/usuario/{{user.id}}/edit"> 
+                    <button class="btn btn-primary">Editar</button> 
+                </a>
+            </td>
+            <td>
+                <a href="/usuario/{{user.id}}/delete"> 
+                    <button class="btn btn-danger" onclick="deletarUsuario({{id}})">Deletar</button> 
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+{{else}}
+    <h1>Acesso não autorizado.</h1>
+{{/if}}
 <script src="../js/index.js"></script>

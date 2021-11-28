@@ -3,7 +3,11 @@ async function getRoot(req, res) {
 }
 
 async function getHome(req, res) {
-    res.render('geral/home', { layout: 'main.handlebars' })
+    res.render('geral/home', { layout: 'main.handlebars', usuario: {
+        id: req.session.id_usuario,
+        nome: req.session.nome,
+        eAdmin: req.session.eAdmin,
+    }});
 }
 
 async function getAdmin(req, res) {

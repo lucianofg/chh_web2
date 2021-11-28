@@ -30,26 +30,29 @@
         </div>
 
         <div class="form-group">
-            <label for="isenha">Senha</label>
-            <input type="password" 
-                class="form-control" 
-                id="isenha" 
-                name="senha" 
-                value="{{usuario.senha}}">
+            <input type="checkbox" 
+                class="form-check-input" 
+                id="iecol" 
+                {{#if usuario.eColaborador}}
+                    checked
+                {{/if}}
+                name="eColaborador">
+            <label class="form-check-label" for="iecol">É Colaborador</label>
         </div>
-
+        
         <div class="form-group">
-            <label for="irepsenha">Repita a sua senha</label>
-            <input type="password" 
-                class="form-control" 
-                id="irepsenha" 
-                name="repsenha" 
-                value="{{usuario.senha}}>       " 
-            <span id='irepsenha_mensagem'></span> 
+            <input type="checkbox" 
+                class="form-check-input" 
+                id="ieadmin" 
+                {{#if usuario.eAdmin}}
+                    checked
+                {{/if}}
+                name="eAdmin">
+            <label class="form-check-label" for="ieadmin">É administrador</label>
         </div>
 
-        <input class="btn btn-warning" type="reset" value="Reverter modificações">
-        <input class="btn btn-dark" type="submit" value="Cadastrar">
+        <input class="btn btn-warning" type="reset" value="Reverter alterações">
+        <input class="btn btn-dark" type="submit" value="Salvar alterações">
     </form>
 </div>
 <script src="../js/index.js"></script>
