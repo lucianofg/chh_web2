@@ -19,12 +19,12 @@ async function postUsuarioCreate(req, res) {
         eAtivo: req.body.eAtivo,
         eAdmin: req.body.eAdmin,
     }).then((usuario) => {
-        res.render('usuario/usuarioCriadoComSucesso', {
+        res.render('usuario/usuarioCriado', {
             layout: 'noMenu.handlebars',
             usuario: usuario.nome,
         })
     }).catch((error) => {
-        res.render('usuario/usuarioCriadoComSucesso', {
+        res.render('usuario/usuarioCriado', {
             layout: 'noMenu.handlebars',
             error: error,
         })
@@ -46,7 +46,7 @@ async function getUsuarioEdit(req, res) {
 async function getUsuarioSelfEdit(req, res) {
     await db.Usuario.findOne({
         where: {
-            id: req.session.id,
+            id: req.session.id_usuario,
         }
     }).then((usuario) => {
         res.render('usuario/usuarioEdit', { 
@@ -88,6 +88,10 @@ async function getUsuarioDelete(req, res) {
             where: {
                 id: req.params.id,
             }
+        });
+        res.render('usuario/usuarioDeletado', {
+            layout: 'noMenu.handlebars',
+            id: req.params.id,
         });
     }
 }
