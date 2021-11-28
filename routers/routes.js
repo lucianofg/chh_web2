@@ -48,6 +48,11 @@ routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensComVo
 routes.get('/concurso/:id_concurso/item/:id_item/view', itemController.getVotosItemConcurso);
 routes.post('/concurso/:id_concurso/item/votar', itemController.postVotarItemConcurso);
 
+routes.get('/404_not_found', generalController.getNotFound);
+
+routes.get('*', function(req, res) {
+    res.redirect('/404_not_found');
+});
 
 
 module.exports = routes;

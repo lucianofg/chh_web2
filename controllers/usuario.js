@@ -132,10 +132,9 @@ async function getUsuarioLogout(req, res) {
 
 async function getUsuarioList(req, res) {
     db.Usuario.findAll().then(usuarios => {
-        var lista = usuarios.map(usuarios => usuarios.toJSON())
         res.render('usuario/usuarioList', {
             usuario: getUsuario(req),
-            listaUsuarios: lista,
+            listaUsuarios: usuarios.map(u=> u.toJSON()),
             layout: 'main.handlebars' 
         });
     }).catch(error => {

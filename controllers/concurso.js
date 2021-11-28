@@ -8,7 +8,7 @@ async function getConcursoResultado(req, res) {
 async function getListaConcursosView(req, res) {
     db.Concurso.findAll().then(concursos => {
         res.render('concurso/concursoList', {
-            concursos: concursos,
+            concursos: concursos.map(c => c.toJSON()),
             usuario: getUsuario(req),
             layout: 'main.handlebars' 
         });
@@ -42,7 +42,10 @@ async function getConcursoView(req, res) {
 }
 
 async function getConcursoCreate(req, res) {
-    res.render('concurso/concursoCreate', { layout: 'noMenu.handlebars' });
+    res.render('concurso/concursoCreate', { 
+        layout: 'noMenu.handlebars',
+        usuario: getUsuario(req),
+    });
 }
 
 async function postConcursoCreate(req, res) {
@@ -50,16 +53,16 @@ async function postConcursoCreate(req, res) {
         nome: req.body.nome,
         descricao: req.body.descricao,
         premio: req.body.premio,
-        prazoEnvioItem: req.body.prazoEnvioItem,
-        dataDivulgacaoResultados: req.body.dataDivulgacaoResultados,
+        prazoEnvioItem: new Date(req.body.prazoEnvioItem),
+        dataDivulgacaoResultado: new Date(req.body.dataDivulgacaoResultado),
     }).then(concurso => {
-        res.render('concurso/concursoCriadoComSucesso', {
+        res.render('concurso/concursoCriado', {
             layout: 'main.handlebars',
             concurso: concurso.nome,
             usuario: getUsuario(req),
         });
     }).catch(error => {
-        res.render('concurso/concursoCriadoComSucesso', {
+        res.render('concurso/concursoCriado', {
             error: error,
             layout: 'main.handlebars',
             usuario: getUsuario(req),
@@ -88,6 +91,7 @@ async function getConcursoEdit(req, res) {
 }
 
 async function postConcursoEdit(req, res) {
+    console.log(req.body.id)
     db.Concurso.findOne({
         where: { id: req.body.id  }
     }).then(concurso => {
@@ -95,10 +99,14 @@ async function postConcursoEdit(req, res) {
             nome: req.body.nome,
             descricao: req.body.descricao,
             premio: req.body.premio,
-            prazoEnvioItem: req.body.prazoEnvioItem,
-            dataDivulgacaoResultados: req.body.dataDivulgacaoResultados,
+            prazoEnvioItem: new Date(req.body.prazoEnvioItem),
+            dataDivulgacaoResultado: new Date(req.body.dataDivulgacaoResultado),
         });
         concurso.save();
+        res.redirect('/concurso/list')
+    }).catch(error => {
+        res.render('erros/404_not_found')
+        console.log(error);
     })
 }
 
@@ -106,6 +114,14 @@ async function getConcursoDelete(req, res) {
     if (req.session.eAdmin) {
         db.Usuario.destroy({
             where: { id: req.params.id, }
+        });
+        res.render('concurso/concursoDeletado', {
+            layout: 'noMenu.handlebars',
+            id: req.params.id,
+        });
+    } else {
+        res.render('concurso/concursoDeletado', {
+            layout: 'noMenu.handlebars',
         });
     }
 }

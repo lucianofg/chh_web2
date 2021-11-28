@@ -14,9 +14,14 @@ async function getAdmin(req, res) {
     res.render('geral/admin', { layout: 'main.handlebars' })
 }
 
+async function getNotFound(req, res) {
+    res.render('erros/404_not_found', {layout: 'noMenu.handlebars'});
+}
+
 
 module.exports = {
     getRoot,
     getHome,
     getAdmin,
+    getNotFound,
 }

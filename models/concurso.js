@@ -14,8 +14,8 @@ const ModeloConcurso = {
     nome: { type: Sequelize.STRING, allowNull: false },
     descricao: { type: Sequelize.TEXT, allowNull: false },
     premio: { type: Sequelize.TEXT, allowNull: false },
-    prazoEnvioItem: { type: Sequelize.DATE, allowNull: false },
-    dataDivulgacaoResultado: { type: Sequelize.DATE, allowNull: false },
+    prazoEnvioItem: { type: Sequelize.DATEONLY, allowNull: false },
+    dataDivulgacaoResultado: { type: Sequelize.DATEONLY, allowNull: false },
 }
 
 const Concurso = schema.define(
