@@ -27,10 +27,11 @@ async function getConcursoView(req, res) {
             id: req.params.id
         }
     }).then(concurso => {
+        if (concurso == undefined) throw new Error("Concurso não achado");
         res.render('concurso/concursoView', {
             layout: 'main.handlebars',
-            concurso: concurso,
-            usuario: getUsuario(req)
+            concurso: concurso.toJSON(),
+            usuario: getUsuario(req),
         });
     }).catch(error => {
         res.render('concurso/concursoView', {
@@ -84,8 +85,11 @@ async function getConcursoEdit(req, res) {
                 eAdmin: req.session.eAdmin,
             },
         });
-    }).catch(err => {
-        res.render('erros/concursoNaoAchado');
+    }).catch(error => {
+        res.render('erros/concursoNaoAchado', {
+            layout: 'noMenu.handlebars',
+            error: error,
+        });
     });
 
 }
@@ -112,7 +116,7 @@ async function postConcursoEdit(req, res) {
 
 async function getConcursoDelete(req, res) {
     if (req.session.eAdmin) {
-        db.Usuario.destroy({
+        db.Concurso.destroy({
             where: { id: req.params.id, }
         });
         res.render('concurso/concursoDeletado', {

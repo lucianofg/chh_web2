@@ -60,7 +60,7 @@
                             </div>
                         </li>
                     {{/if}}
-                    {{#if usuario}}
+                    {{#if usuario.id}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
                                href="#"
@@ -79,7 +79,7 @@
                     {{/if}}
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    {{#if usuario}}
+                    {{#if usuario.id}}
                         <li class="nav-item">
                             <a class="nav-link" href="/usuario/logout">Logout</a>
                         </li>

@@ -9,7 +9,7 @@ const routes = express.Router();
 
 // Rotas gerais
 routes.get('/', generalController.getRoot);
-routes.get('/home', generalController.getHome);
+routes.get('/home', (req, res) => { res.redirect('/') });
 routes.get('/admin', generalController.getAdmin);
 
 // Rotas relacionadas ao usuário
@@ -35,18 +35,15 @@ routes.post('/concurso/edit', concursoController.postConcursoEdit);
 routes.get('/concurso/:id/delete', concursoController.getConcursoDelete);
 
 // Rotas relacionadas aos itens de um concurso
-routes.get('/item/list', itemController.getListaItensView);
+routes.get('/item/:id_concurso/list', itemController.getListaItensView);
 routes.get('/item/:id_item/view', itemController.getItemView);
-routes.get('/item/create', itemController.getItemCreate);
+routes.get('/item/:id_concurso/create', itemController.getItemCreate);
 routes.post('/item/create', itemController.postItemCreate);
 routes.get('/item/:id_item/edit', itemController.getItemEdit);
 routes.post('/item/edit', itemController.postItemEdit);
 routes.get('/item/:id_item/delete', itemController.getItemDelete);
 
-// Rotas relacionadas as votações
-routes.get('/concurso/:id_concurso/item/view', itemController.getListaItensComVotos);
-routes.get('/concurso/:id_concurso/item/:id_item/view', itemController.getVotosItemConcurso);
-routes.post('/concurso/:id_concurso/item/votar', itemController.postVotarItemConcurso);
+routes.post('/item/:id_item/vote', itemController.postVotarItemConcurso);
 
 routes.get('/404_not_found', generalController.getNotFound);
 

@@ -38,8 +38,11 @@ async function getUsuarioEdit(req, res) {
         }
     }).then((usuario) => {
         res.render('usuario/usuarioEdit', { usuario: usuario.toJSON() });
-    }).catch(err => {
-        res.render('erros/usuarioNaoAchado');
+    }).catch(error => {
+        res.render('erros/usuarioNaoAchado', {
+            layout: 'noMenu.handlebars',
+            error: error
+        });
     });
 }
 
@@ -73,6 +76,11 @@ async function postUsuarioEdit(req, res) {
             eColaborador: eColaborador,
         });
         usuario.save();
+        res.render('usuario/usuarioEditado', {
+            layout: 'noMenu.handlebars',
+            nomeEditado: usuario.nome,
+            usuario: getUsuario(req),
+        });
     }).catch(error => {
         res.json({
             error: error,

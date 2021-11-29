@@ -1,4 +1,4 @@
-{{#if usuario}}
+{{#if id}}
     <h1>Usuário com id: "{{id}}" foi removido</h1>
 {{else}}
     <h1>Erro na remoção do usuário com id: {{id}}</h1>
@@ -6,5 +6,6 @@
 {{/if}}
 
 <a href='/usuario/list'><button class="btn btn-primary btn-lg">Voltar a lista de usuários</button></a>
+<br>
 <br>
 <a href='/'><button class="btn btn-secondary">Voltar a página inicial</button></a>
