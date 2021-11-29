@@ -1,0 +1,43 @@
+{{#if usuario.id}}
+    <center><h1>Seus itens enviados</h1></center>
+    {{#if itens}}
+        <table  class="table table-hover table-striped">
+        <thead  class="bg-primary">
+            <tr>
+                <th scope="col">Nome </th>
+                <th scope="col">Concurso</th>
+                <th scope="col">Item</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each itens as | i |}}
+            <tr>
+                <th scope="row">{{i.nome}}</th>
+                <td>
+                    <a href=/concurso/{{i.id_concurso}}/view>
+                        {{i.nome_concurso}}
+                    </a>
+                </td>
+                <td><a href={{link_item}}>Ver item</a></td>
+                <td>
+                    <a href="/item/{{i.id}}/edit"> 
+                        <button class="btn btn-primary">Editar</button> 
+                    </a>
+                </td>
+                <td>
+                    <a href="/item/{{i.id}}/delete"> 
+                        <button class="btn btn-danger">Excluir</button> 
+                    </a>
+                </tr>
+            {{/each}}
+        </tbody>
+        </table>
+    {{else}}
+        <h2>Erro na recuperação da lista de itens</h2>
+    {{/if}}
+{{else}}
+    <h2>Faça o login para acessar os seus itens</h2>
+{{/if}}
+

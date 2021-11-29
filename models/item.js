@@ -17,10 +17,6 @@ const ModeloItem = {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    tipo_item: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
     link_item: {
         type: Sequelize.STRING,
         allowNull: false

@@ -1,0 +1,21 @@
+{{#if item}}
+    <h1>{{item.nome}}</h1>
+    <br>
+    <a href="{{item.link_item}}"><button class="btn btn-primary">Ver item</button></a>
+    <br>
+    {{#if concursoTerminou}}
+        <strong>Numero de votos: </strong>{{item.numeroVotos}}
+    {{else}}
+        <form action="/item/vote" method="post">
+            <input type="hidden" 
+                   name="id" 
+                   value="{{item.id}}">
+            <input id="icadastrar" 
+                   class="btn btn-success" 
+                   type="submit" 
+                   value="Votar">
+        </form>
+    {{/if}}
+{{else}}
+    <h1>Item não achado</h1>
+{{/if}}

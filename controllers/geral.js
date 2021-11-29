@@ -1,17 +1,17 @@
+const {  getUsuario } = require('./utils');
+
 async function getRoot(req, res) {
-    res.render('geral/root', { layout: 'main.handlebars' })
+    res.render('geral/root', {
+        layout: 'main.handlebars',
+        usuario: getUsuario(req),
+    })
 }
 
 async function getHome(req, res) {
-    res.render('geral/home', { layout: 'main.handlebars', usuario: {
-        id: req.session.id_usuario,
-        nome: req.session.nome,
-        eAdmin: req.session.eAdmin,
-    }});
-}
-
-async function getAdmin(req, res) {
-    res.render('geral/admin', { layout: 'main.handlebars' })
+    res.render('geral/home', {
+        layout: 'main.handlebars',
+        usuario: getUsuario(req),
+    });
 }
 
 async function getNotFound(req, res) {
@@ -22,6 +22,5 @@ async function getNotFound(req, res) {
 module.exports = {
     getRoot,
     getHome,
-    getAdmin,
     getNotFound,
 }

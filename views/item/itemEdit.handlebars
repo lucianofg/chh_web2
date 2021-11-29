@@ -1,4 +1,4 @@
-{{#if usuario}}
+{{#if usuario.id}}
 {{#if item}}
 <div class="col-md-4 col-md-offset-4">
     <form action="/item/edit" 
@@ -12,12 +12,7 @@
                 class="form-control" 
                 id="inome" 
                 name="nome" 
-                value={{item.nome}}
-        </div>
-
-        <div class="form-group">
-            <label for="iarquivo">Arquivo</label>
-            <input type="file" class="form-control" id="iarquivo" name="arquivo">
+                value={{item.nome}}>
         </div>
 
         <input id="isalvar" 

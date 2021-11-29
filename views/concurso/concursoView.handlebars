@@ -11,14 +11,23 @@
             {{concurso.dataDivulgacaoResultado}}
         </p>
 
-        {{#if aceitaEnvios}}
-            <a href="/item/{{concurso.id}}/create" >
-                <button class="btn btn-sucess">Enviar item para o concurso</button>
-            </a>
-        {{/if}}
-
+        {{#if concursoAceitaEnvios}}
         <p>
-            <button class="btn btn-primary" 
+            <a href="/item/concurso/{{concurso.id}}/create" >
+                <button class="btn btn-success btn-block">Enviar item para o concurso</button>
+            </a>
+        </p>
+        {{/if}}
+        {{#if concursoSaiuResultado}}
+        <p>
+            <a href="/concurso/{{concurso.id}}/resultado" >
+                <button class="btn btn-primary btn-block">Ver resultado do concurso</button>
+            </a>
+        </p>
+
+        {{/if}}
+        <p>
+            <button class="btn btn-secondary btn-block" 
                     type="button" 
                     data-toggle="collapse" 
                     data-target="#collapseDescricao" 
@@ -35,7 +44,7 @@
         </p>
 
         <p>
-            <button class="btn btn-primary" 
+            <button class="btn btn-secondary btn-block" 
                     type="button" 
                     data-toggle="collapse" 
                     data-target="#collapsePremio" 
@@ -51,7 +60,13 @@
             </div>
         </p>
 
-        <p>TODO: Ver itens que estão concorrendo ao concurso</p>
+        <p>
+        <a href="/item/concurso/{{concurso.id}}/list">
+            <button class="btn btn-primary btn-block">
+                Ver todos os itens concorrendo
+            </button>
+        </a>
+        </p>
 
     </div>
 {{else}}

@@ -1,5 +1,4 @@
-/* Futuro scripts */
-
+/* Durante o cadastro do usuário, verifica se as senhas colocadas são equivalentes */
 $('#isenha, #irepsenha').on('keyup', function() {
     if ($('#isenha').val() == $('#irepsenha').val()) {
         $('#irepsenha_mensagem').html('As senhas são iguais').css('color', 'green');
@@ -10,8 +9,10 @@ $('#isenha, #irepsenha').on('keyup', function() {
     }
 });
 
-function deletarUsuario(id) {
-    $.get('/usuario/' + id + '/delete', (data, status) => {
-        alert(status);
-    })
+function validarEmail(email) {
+    alert("validarEmail não implementado");
+}
+
+function votarItem(id) {
+    alert("votarItem não implementado");
 }

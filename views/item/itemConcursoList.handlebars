@@ -1,0 +1,40 @@
+<center><h1> Listar de itens do Concurso </h1></center>
+{{#if concurso}}
+    <center><h2>{{concurso.nome}}</h2></center>
+{{/if}}
+{{#if itens}}
+    <table  class="table table-hover table-striped">
+    <thead  class="bg-primary">
+        <tr>
+            <th scope="col">Nome </th>
+            <th scope="col">Item</th>
+            {{#if usuario.id}}
+                <th scope="col">Votar</th>
+            {{/if}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each itens as | i |}}
+        <tr>
+            <th scope="row">{{i.nome}}</th>
+            <td><a href={{link_item}}>Ver item</a></td>
+            {{#if usuario.id}}
+            <td>
+                <form action="/item/vote" method="post">
+                    <input type="hidden" 
+                           name="id" 
+                           value="{{i.id}}">
+                    <input id="icadastrar" 
+                           class="btn btn-success" 
+                           type="submit" 
+                           value="Votar">
+                </form>
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+{{else}}
+    <h2>Erro na recuperação da lista de itens</h2>
+{{/if}}

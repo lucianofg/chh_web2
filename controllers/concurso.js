@@ -28,9 +28,16 @@ async function getConcursoView(req, res) {
         }
     }).then(concurso => {
         if (concurso == undefined) throw new Error("Concurso não achado");
+        /*
+        var aceita_envios = new Date(concurso.prazoEnvioItem) <= new Date() ? true : false;
+        var saiu_resultado = new Date(concurso.dataDivulgacaoResultado) < new Date() ? true : false;
+        */
+
         res.render('concurso/concursoView', {
             layout: 'main.handlebars',
             concurso: concurso.toJSON(),
+            concursoAceitaEnvios: true,
+            concursoSaiuResultado: true,
             usuario: getUsuario(req),
         });
     }).catch(error => {

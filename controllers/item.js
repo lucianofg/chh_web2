@@ -1,8 +1,55 @@
 const db = require('../config/db');
+const { getUsuario } = require('./utils');
+const uploadsFolder = '/uploads'
 
-async function getListaItensView(req, res) {
-
+async function getListaItensConcursoView(req, res) {
+    const concurso = await db.Concurso.findByPk(req.params.id_concurso);
+    db.Item.findAll({
+        where: {
+            id_concurso: req.params.id_concurso,
+        },
+    }).then(itens => {
+        res.render('item/itemConcursoList', {
+            layout: 'main.handlebars',
+            itens: itens.map(i => i.toJSON()),
+            concurso: concurso.toJSON(),
+            usuario: getUsuario(req),
+        })
+    }).catch(error => {
+        res.render('item/itemConcursoList', {
+            layout: 'main.handlebars',
+            concurso: concurso.toJSON(),
+            error: error,
+        });
+    });
 }
+
+async function getListaItensUsuarioView(req, res) {
+    const query = `SELECT 
+            items.id as id, 
+            items.nome as nome, 
+            items.link_item as link_item, 
+            concursos.nome as nome_concurso, 
+            concursos.id as id_concurso, 
+        FROM items INNER JOIN concursos 
+            ON concursos.id = items.id_concurso;`
+    db.schema.query(query).then(itens => {
+        console.log(itens);
+        res.render('item/itemConcursoList', {
+            layout: 'main.handlebars',
+            itens: itens.map(i => i.toJSON()),
+            usuario: getUsuario(req),
+        });
+    }).catch(error => {
+        console.log(error);
+        res.render('item/itemConcursoList', {
+            layout: 'main.handlebars',
+            error: error,
+        });
+
+    });
+}
+
 
 async function getItemView(req, res) {
     db.Item.findOne({
@@ -11,22 +58,21 @@ async function getItemView(req, res) {
         res.render('item/itemView', { 
             layout: 'main.handlebars',
             item: item.toJSON(),
-            usuario: {
-                id: req.session.id_usario,
-                eAdmin: req.session.eAdmin,
-            },
+            usuario: getUsuario(req),
         });
     }).catch(error => {
-
+        res.render('item/itemView', {
+            layout: 'main.handlebars',
+            error: error,
+        })
     });
 }
+
 async function getItemCreate(req, res) {
     res.render('item/itemCreate', { 
         layout: 'main.handlebars',
-        usuario: {
-            id: req.session.id_usario,
-            eAdmin: req.session.eAdmin,
-        },
+        usuario: getUsuario(req),
+        id_concurso: req.params.id_concurso,
     });
 }
 
@@ -36,11 +82,17 @@ async function postItemCreate(req, res) {
         id_usuario: req.session.id_usuario,
         numero_votos: 0,
         nome: req.body.nome,
-        link_item: req.body.link_item,
+        link_item: uploadsFolder + req.file.filename,
     }).then(item => {
-
+        res.render('item/itemCriado', {
+            layout: 'noMenu.handlebars',
+            item: item.nome,
+        });
     }).catch(error => {
-
+        res.render('item/itemCriado', {
+            layout: 'main.handlebars',
+            error: error,
+        });
     });
 }
 
@@ -77,19 +129,13 @@ async function postItemEdit(req, res) {
 }
 
 async function getItemDelete(req, res) {
-    db.Item.destroy({
-        where: {
-            id: req.params.id,
-        }
-    });
-}
-
-async function getListaItensComVotos(req, res) {
-
-}
-
-async function getVotosItemConcurso(req, res) {
-
+    if (req.session.eAdmin) {
+        db.Item.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+    }
 }
 
 async function postVotarItemConcurso(req, res) {
@@ -111,14 +157,13 @@ async function postVotarItemConcurso(req, res) {
 }
 
 module.exports = {
-    getListaItensView,
+    getListaItensConcursoView,
+    getListaItensUsuarioView,
     getItemView,
     getItemCreate,
     postItemCreate,
     getItemEdit,
     postItemEdit,
     getItemDelete,
-    getListaItensComVotos,
-    getVotosItemConcurso,
     postVotarItemConcurso,
 };

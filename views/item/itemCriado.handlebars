@@ -1,0 +1,9 @@
+{{#if item}}
+    <h1>Item "{{item}}" salvo com sucesso!</h1>
+{{else}}
+    <h1>Erro em salvar item</h1>
+    <p>{{error}}</p>
+{{/if}}
+<a href='/item/concurso/{{id_concurso}}/create'><button class="btn btn-primary btn-lg">Voltar a página de envio</button></a>
+<br>
+<a href='/'><button class="btn btn-secondary">Voltar a página inicial</button></a>
