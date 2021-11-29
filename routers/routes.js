@@ -6,6 +6,7 @@ const usuarioController = require('../controllers/usuario');
 const concursoController = require('../controllers/concurso');
 const itemController = require('../controllers/item');
 const generalController = require('../controllers/geral');
+const apiController = require('../controllers/api');
 
 
 const upload = multer({
@@ -61,7 +62,6 @@ routes.post(
     itemController.postItemCreate
 );
 
-
-routes.post('/item/vote', itemController.postVotarItemConcurso);
+routes.post('/api/item/votar', apiController.postMudarGostar);
 
 module.exports = routes;

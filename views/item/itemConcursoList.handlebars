@@ -24,11 +24,17 @@
                     <td><a href={{link_item}}>Ver item</a></td>
                     {{#if ../usuario.id}}
                         <td>
-                            <button id="votar_{{i.id}}" 
-                                    class="btn btn-success"
-                                    onclick="votarItem('{{i.id}}')">
-                                Gostar
-                            </button>
+                            {{#if i.gostou}}
+                                <button id="votar_{{i.id}}" 
+                                        class="btn btn-success"
+                                        onclick="votarItem('{{i.id}}', '{{../usuario.id}}')"
+                                        >Gostei</button>
+                            {{else}}
+                                <button id="votar_{{i.id}}" 
+                                        class="btn btn-outline-success"
+                                         onclick="votarItem('{{i.id}}', '{{../usuario.id}}')"
+                                         >Gostar</button>
+                            {{/if}}
                         </td>
                     {{/if}}
                     {{#if ../usuario.eAdmin}}

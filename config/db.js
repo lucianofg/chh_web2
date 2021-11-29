@@ -6,10 +6,6 @@ db.Item = require('../models/item');
 db.Gostou = require('../models/gostou')
 db.schema = require('./sequelize_postgres');
 
-db.Usuario.sync()
-db.Concurso.sync()
-db.Item.sync()
-db.Gostou.sync()
-
+db.schema.sync()
 
 module.exports = db;
