@@ -37,7 +37,6 @@ async function getListaItensUsuarioView(req, res) {
     const itens = await db.schema.query(query, {
         type: QueryTypes.SELECT,
     })
-    console.log(itens);
     res.render('item/itemUsuarioList', {
         layout: 'main.handlebars',
         itens: itens,
@@ -131,7 +130,6 @@ async function postItemEdit(req, res) {
 
 async function getItemDelete(req, res) {
     db.Item.findByPk(req.params.id).then(item => {
-        console.log(item);
         if (req.session.eAdmin || item.usuarioId == req.session.id_usuario) {
             item.destroy().then(item => {
                 res.render('item/itemDeletado', {
@@ -158,7 +156,7 @@ async function postVotarItemConcurso(req, res) {
         }
     }).then(vic => {
         vic.increment('numero_votos', { returning: false });
-        
+
     }).catch(error => {
         res.json({
             error: error

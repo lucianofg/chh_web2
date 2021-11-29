@@ -19,25 +19,25 @@ app.use(cookieParser());
 app.use(session({
     secret: SECRET,
     saveUninitialized: true,
-    cookie: {maxAge: COOKIE_MAX_AGE},
+    cookie: { maxAge: COOKIE_MAX_AGE },
 }));
 
 // Isso aqui é usado para acessar as variáveis da sessão em todos os templates
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
 
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(logRegister);
 app.use(sessionControl);
 app.use(routes);
 
-app.listen(PORT, function () {
-    console.log("Servidor rodando no http://localhost:8081");
+app.listen(PORT, function() {
+    console.log(`Servidor rodando no http://localhost:${PORT}`);
 });

@@ -10,7 +10,7 @@ async function getListaConcursosView(req, res) {
         res.render('concurso/concursoList', {
             concursos: concursos.map(c => c.toJSON()),
             usuario: getUsuario(req),
-            layout: 'main.handlebars' 
+            layout: 'main.handlebars'
         });
     }).catch(error => {
         res.render('concurso/concursoList', {
@@ -48,7 +48,7 @@ async function getConcursoView(req, res) {
 }
 
 async function getConcursoCreate(req, res) {
-    res.render('concurso/concursoCreate', { 
+    res.render('concurso/concursoCreate', {
         layout: 'noMenu.handlebars',
         usuario: getUsuario(req),
     });
@@ -83,7 +83,7 @@ async function getConcursoEdit(req, res) {
         }
     }).then((concurso) => {
         if (concurso == null) throw new Error("Concurso não achado");
-        res.render('concurso/concursoEdit', { 
+        res.render('concurso/concursoEdit', {
             concurso: concurso.toJSON(),
             usuario: {
                 id: req.session.id_usario,
@@ -100,9 +100,8 @@ async function getConcursoEdit(req, res) {
 }
 
 async function postConcursoEdit(req, res) {
-    console.log(req.body.id)
     db.Concurso.findOne({
-        where: { id: req.body.id  }
+        where: { id: req.body.id }
     }).then(concurso => {
         concurso.set({
             nome: req.body.nome,
@@ -112,10 +111,16 @@ async function postConcursoEdit(req, res) {
             dataDivulgacaoResultado: new Date(req.body.dataDivulgacaoResultado),
         });
         concurso.save();
-        res.redirect('/concurso/list')
+        res.render('concurso/concursoEditado', {
+            layout: 'noMenu.handlebars',
+            concurso: req.body.nome,
+            usuario: getUsuario(req),
+        })
     }).catch(error => {
-        res.render('erros/404_not_found')
-        console.log(error);
+        res.render('concurso/concursoEditado', {
+            error: error,
+            usuario: getUsuario(req),
+        })
     })
 }
 
