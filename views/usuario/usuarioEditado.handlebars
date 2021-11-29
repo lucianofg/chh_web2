@@ -1,0 +1,11 @@
+{{#if nomeEditado}}
+    <h1>As alterações foram salvas para o usuário {{nomeEditado}}</h1>
+{{else}}
+    <h1>Erro na edição do usuário</h1>
+    <p>{{error}}</p>
+{{/if}}
+{{#if usuario.eAdmin}}
+<a href='/usuario/create'><button class="btn btn-primary btn-lg">Voltar a lista de usuários</button></a>
+{{/if}}
+<br>
+<a href='/'><button class="btn btn-secondary">Voltar a página inicial</button></a>

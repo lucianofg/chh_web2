@@ -1,0 +1,13 @@
+{{#if concurso}}
+    <h1>As alterações foram salvas para o concurso {{concurso}}</h1>
+{{else}}
+    <h1>Erro na edição do concurso</h1>
+    <p>{{error}}</p>
+{{/if}}
+
+{{#if usuario.eAdmin}}
+<a href='/concurso/list'><button class="btn btn-primary btn-lg">Voltar a lista de concursos</button></a>
+{{/if}}
+
+<br>
+<a href='/'><button class="btn btn-secondary">Voltar a página inicial</button></a>
