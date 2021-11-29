@@ -47,10 +47,10 @@ routes.post('/concurso/edit', concursoController.postConcursoEdit);
 routes.get('/concurso/:id/delete', concursoController.getConcursoDelete);
 
 // Rotas relacionadas aos itens de um concurso
-routes.get('/item/concurso/:id_concurso/list', itemController.getListaItensConcursoView);
+routes.get('/item/concurso/:concurso_id/list', itemController.getListaItensConcursoView);
 routes.get('/item/usuario/list', itemController.getListaItensUsuarioView);
 routes.get('/item/:id_item/view', itemController.getItemView);
-routes.get('/item/concurso/:id_concurso/create', itemController.getItemCreate);
+routes.get('/item/concurso/:concurso_id/create', itemController.getItemCreate);
 routes.get('/item/:id_item/edit', itemController.getItemEdit);
 routes.post('/item/edit', itemController.postItemEdit);
 routes.get('/item/:id_item/delete', itemController.getItemDelete);

@@ -1,12 +1,13 @@
+const { QueryTypes } = require('sequelize');
 const db = require('../config/db');
 const { getUsuario } = require('./utils');
 const uploadsFolder = '/uploads'
 
 async function getListaItensConcursoView(req, res) {
-    const concurso = await db.Concurso.findByPk(req.params.id_concurso);
+    const concurso = await db.Concurso.findByPk(req.params.concurso_id);
     db.Item.findAll({
         where: {
-            id_concurso: req.params.id_concurso,
+            concurso_id: req.params.concurso_id,
         },
     }).then(itens => {
         res.render('item/itemConcursoList', {
@@ -30,23 +31,19 @@ async function getListaItensUsuarioView(req, res) {
             items.nome as nome, 
             items.link_item as link_item, 
             concursos.nome as nome_concurso, 
-            concursos.id as id_concurso, 
+            concursos.id as concurso_id 
         FROM items INNER JOIN concursos 
-            ON concursos.id = items.id_concurso;`
-    db.schema.query(query).then(itens => {
-        console.log(itens);
-        res.render('item/itemConcursoList', {
-            layout: 'main.handlebars',
-            itens: itens.map(i => i.toJSON()),
-            usuario: getUsuario(req),
-        });
-    }).catch(error => {
-        console.log(error);
-        res.render('item/itemConcursoList', {
-            layout: 'main.handlebars',
-            error: error,
-        });
-
+            ON concursos.id = items.concurso_id;`
+    const itens = await db.schema.query(query, {
+        raw: true,
+        type: QueryTypes.SELECT,
+    })
+    console.log(itens.map(i => i.toJSON()));
+    console.log(itens);
+    res.render('item/itemConcursoList', {
+        layout: 'main.handlebars',
+        itens: itens.map(i => i.toJSON()),
+        usuario: getUsuario(req),
     });
 }
 
@@ -55,7 +52,7 @@ async function getItemView(req, res) {
     db.Item.findOne({
         where: { id: req.params.id }
     }).then(item => {
-        res.render('item/itemView', { 
+        res.render('item/itemView', {
             layout: 'main.handlebars',
             item: item.toJSON(),
             usuario: getUsuario(req),
@@ -69,17 +66,17 @@ async function getItemView(req, res) {
 }
 
 async function getItemCreate(req, res) {
-    res.render('item/itemCreate', { 
+    res.render('item/itemCreate', {
         layout: 'main.handlebars',
         usuario: getUsuario(req),
-        id_concurso: req.params.id_concurso,
+        concurso_id: req.params.concurso_id,
     });
 }
 
 async function postItemCreate(req, res) {
     db.Item.create({
-        id_concurso: req.body.id_concurso,
-        id_usuario: req.session.id_usuario,
+        concurso_id: req.body.concurso_id,
+        usuario_id: req.session.usuario_id,
         numero_votos: 0,
         nome: req.body.nome,
         link_item: uploadsFolder + req.file.filename,
@@ -100,7 +97,7 @@ async function getItemEdit(req, res) {
     await db.Item.findOne({
         where: {
             id: req.params.id_item,
-            id_concurso: req.params.id_concurso,
+            concurso_id: req.params.concurso_id,
         }
     }).then((item) => {
         res.render('item/itemEdit', {
@@ -140,12 +137,12 @@ async function getItemDelete(req, res) {
 
 async function postVotarItemConcurso(req, res) {
     const id_item = req.body.id_item;
-    const id_concurso = req.params.id_concurso;
+    const concurso_id = req.params.concurso_id;
 
     db.Item.findOne({
         where: {
             id_item: id_item,
-            id_concurso: id_concurso,
+            concurso_id: concurso_id,
         }
     }).then(vic => {
         vic.increment('numero_votos', { returning: false });

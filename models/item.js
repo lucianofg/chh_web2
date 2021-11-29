@@ -5,6 +5,7 @@
 const Sequelize = require('sequelize');
 const schema = require('../config/sequelize_postgres');
 const Concurso = require('./concurso');
+const Usuario = require('./usuario');
 
 const ModeloItem = {
     id: {
@@ -32,6 +33,7 @@ const Item = schema.define(
     'item', ModeloItem, { underscored: true },
 );
 
-Item.belongsTo(Concurso, { as: 'id_concurso' });
+Item.belongsTo(Concurso);
+Item.belongsTo(Usuario);
 
 module.exports = Item;

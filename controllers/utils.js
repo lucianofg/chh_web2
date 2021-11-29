@@ -9,7 +9,7 @@ function gerarSalt() {
 
 function getUsuario(req) {
     return {
-        id: req.session.id_usuario,
+        id: req.session.usuario_id,
         nome: req.session.nome,
         eAdmin: req.session.eAdmin,
     }

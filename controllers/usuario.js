@@ -49,10 +49,10 @@ async function getUsuarioEdit(req, res) {
 async function getUsuarioSelfEdit(req, res) {
     await db.Usuario.findOne({
         where: {
-            id: req.session.id_usuario,
+            id: req.session.usuario_id,
         }
     }).then((usuario) => {
-        res.render('usuario/usuarioEdit', { 
+        res.render('usuario/usuarioEdit', {
             usuario: usuario.toJSON(),
             layout: 'noMenu.handlebars'
         });
@@ -64,7 +64,7 @@ async function getUsuarioSelfEdit(req, res) {
 async function postUsuarioEdit(req, res) {
     const eAdmin = req.body.eAdmin ? true : false;
     const eColaborador = req.body.eColaborador ? true : false;
-    
+
     db.Usuario.findOne({
         where: { id: req.body.id }
     }).then(usuario => {
@@ -117,7 +117,7 @@ async function postUsuarioLogin(req, res) {
         if (usuario) {
             argon.verify(usuario.senha, senha + usuario.salt).then(deu_certo => {
                 if (deu_certo) {
-                    req.session.id_usuario = usuario.id;
+                    req.session.usuario_id = usuario.id;
                     req.session.nome = usuario.nome;
                     req.session.eAdmin = usuario.eAdmin;
                     res.redirect('/home')
@@ -129,7 +129,7 @@ async function postUsuarioLogin(req, res) {
             throw new Error("E-mail não cadastrado.")
         }
     }).catch(error => {
-        res.render('erros/usuarioNaoAchado', {error: error})
+        res.render('erros/usuarioNaoAchado', { error: error })
     });
 }
 
@@ -142,8 +142,8 @@ async function getUsuarioList(req, res) {
     db.Usuario.findAll().then(usuarios => {
         res.render('usuario/usuarioList', {
             usuario: getUsuario(req),
-            listaUsuarios: usuarios.map(u=> u.toJSON()),
-            layout: 'main.handlebars' 
+            listaUsuarios: usuarios.map(u => u.toJSON()),
+            layout: 'main.handlebars'
         });
     }).catch(error => {
         res.render('usuario/usuarioList', {

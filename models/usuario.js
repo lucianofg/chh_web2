@@ -7,8 +7,8 @@ const schema = require('../config/sequelize_postgres')
 
 const ModeloUsuario = {
     id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
@@ -25,11 +25,6 @@ const ModeloUsuario = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: true,
-    },
-    eAtivo: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
     },
     eAdmin: {
         type: Sequelize.BOOLEAN,
