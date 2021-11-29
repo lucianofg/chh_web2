@@ -22,29 +22,17 @@ function votarItem(id, usuario_id) {
             usuario_id: usuario_id,
             gostou: false 
         }, (data, status) => {
-            alert("Data: " + data + "\nStatus: " + status);
+            document.getElementById(id_item).innerHTML = "Gostar";
+            document.getElementById(id_item).className = "btn btn-outline-success"
         })
-        document.getElementById(id_item).innerHTML = "Gostar";
-        document.getElementById(id_item).className = "btn btn-outline-success"
     } else {
         $.post('/api/item/votar', {
             item_id: id,
             usuario_id: usuario_id,
             gostou: true 
         }, (data, status) => {
-            alert("Data: " + data + "\nStatus: " + status);
+            document.getElementById(id_item).innerHTML = "Gostei";
+            document.getElementById(id_item).className = "btn btn-success"
         })
-        document.getElementById(id_item).innerHTML = "Gostei";
-        document.getElementById(id_item).className = "btn btn-success"
     }
 }
-$("button").click(function(){
-  $.post("demo_test_post.asp",
-  {
-    name: "Donald Duck",
-    city: "Duckburg"
-  },
-  function(data, status){
-    alert("Data: " + data + "\nStatus: " + status);
-  });
-}); 

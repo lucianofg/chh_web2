@@ -4,24 +4,22 @@ const { getUsuario } = require('./utils');
 const uploadsFolder = '/uploads'
 
 async function getListaItensConcursoView(req, res) {
-    const concurso = await db.Concurso.findByPk(req.params.concurso_id);
-    db.Item.findAll({
-        where: {
-            concurso_id: req.params.concurso_id,
-        },
-    }).then(itens => {
-        res.render('item/itemConcursoList', {
-            layout: 'main.handlebars',
-            itens: itens.map(i => i.toJSON()),
-            concurso: concurso.toJSON(),
-            usuario: getUsuario(req),
-        })
-    }).catch(error => {
-        res.render('item/itemConcursoList', {
-            layout: 'main.handlebars',
-            concurso: concurso.toJSON(),
-            error: error,
-        });
+    const query = `
+        SELECT
+            items.id as id,
+            items.nome as nome,
+            items.link_item as link_item,
+            gostous.gostou as gostou
+        FROM items LEFT JOIN gostous ON
+            items.id = gostous.item_id
+        ;`
+    const itens = await db.schema.query(query, {
+        type: QueryTypes.SELECT,
+    })
+    res.render('item/itemConcursoList', {
+        layout: 'main.handlebars',
+        itens: itens,
+        usuario: getUsuario(req),
     });
 }
 
@@ -41,6 +39,7 @@ async function getListaItensUsuarioView(req, res) {
     const itens = await db.schema.query(query, {
         type: QueryTypes.SELECT,
     })
+    console.log(itens);
     res.render('item/itemUsuarioList', {
         layout: 'main.handlebars',
         itens: itens,
@@ -151,23 +150,6 @@ async function getItemDelete(req, res) {
     })
 }
 
-async function postVotarItemConcurso(req, res) {
-    const id_item = req.body.id_item;
-
-    db.Item.findOne({
-        where: {
-            id_item: id_item,
-        }
-    }).then(vic => {
-        vic.increment('numero_votos', { returning: false });
-
-    }).catch(error => {
-        res.json({
-            error: error
-        })
-    });
-}
-
 module.exports = {
     getListaItensConcursoView,
     getListaItensUsuarioView,
@@ -177,5 +159,4 @@ module.exports = {
     getItemEdit,
     postItemEdit,
     getItemDelete,
-    postVotarItemConcurso,
 };
