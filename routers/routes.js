@@ -12,7 +12,7 @@ const upload = multer({
     storage: multer.diskStorage({
         destination: 'public/uploads/',
         filename(req, file, cb) {
-            const fileName = `${uuid()}-${file.originalname}`
+            const fileName = `${uuid()}-${file.originalname.replaceAll(' ', '_')}`
             return cb(null, fileName)
         },
     }),
@@ -53,7 +53,7 @@ routes.get('/item/:id_item/view', itemController.getItemView);
 routes.get('/item/concurso/:concurso_id/create', itemController.getItemCreate);
 routes.get('/item/:id_item/edit', itemController.getItemEdit);
 routes.post('/item/edit', itemController.postItemEdit);
-routes.get('/item/:id_item/delete', itemController.getItemDelete);
+routes.get('/item/:id/delete', itemController.getItemDelete);
 
 routes.post(
     '/item/create',
@@ -63,12 +63,5 @@ routes.post(
 
 
 routes.post('/item/vote', itemController.postVotarItemConcurso);
-
-routes.get('/404_not_found', generalController.getNotFound);
-
-routes.get('*', function(req, res) {
-    res.redirect('/404_not_found');
-});
-
 
 module.exports = routes;

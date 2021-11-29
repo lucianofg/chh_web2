@@ -35,14 +35,12 @@ async function getListaItensUsuarioView(req, res) {
         FROM items INNER JOIN concursos 
             ON concursos.id = items.concurso_id;`
     const itens = await db.schema.query(query, {
-        raw: true,
         type: QueryTypes.SELECT,
     })
-    console.log(itens.map(i => i.toJSON()));
     console.log(itens);
-    res.render('item/itemConcursoList', {
+    res.render('item/itemUsuarioList', {
         layout: 'main.handlebars',
-        itens: itens.map(i => i.toJSON()),
+        itens: itens,
         usuario: getUsuario(req),
     });
 }
@@ -75,15 +73,16 @@ async function getItemCreate(req, res) {
 
 async function postItemCreate(req, res) {
     db.Item.create({
-        concurso_id: req.body.concurso_id,
-        usuario_id: req.session.usuario_id,
+        concursoId: req.body.concurso_id,
+        usuarioId: req.session.usuario_id,
         numero_votos: 0,
         nome: req.body.nome,
-        link_item: uploadsFolder + req.file.filename,
+        link_item: uploadsFolder + '/' + req.file.filename,
     }).then(item => {
         res.render('item/itemCriado', {
             layout: 'noMenu.handlebars',
             item: item.nome,
+            concurso_id: req.body.concurso_id,
         });
     }).catch(error => {
         res.render('item/itemCriado', {
@@ -117,8 +116,13 @@ async function postItemEdit(req, res) {
             link_item: req.body.link_item,
         });
         item.save();
+        res.render('item/itemEditado', {
+            layout: 'noMenu.handlebars',
+            nomeEditado: req.body.nome,
+        })
     }).catch(error => {
-        res.json({
+        res.render('item/itemEditado', {
+            layout: 'noMenu.handlebars',
             error: error,
         });
     })
@@ -126,26 +130,35 @@ async function postItemEdit(req, res) {
 }
 
 async function getItemDelete(req, res) {
-    if (req.session.eAdmin) {
-        db.Item.destroy({
-            where: {
-                id: req.params.id,
-            }
-        });
-    }
+    db.Item.findByPk(req.params.id).then(item => {
+        console.log(item);
+        if (req.session.eAdmin || item.usuarioId == req.session.id_usuario) {
+            item.destroy().then(item => {
+                res.render('item/itemDeletado', {
+                    layout: 'noMenu.handlebars',
+                    id: req.params.id,
+                    eAdmin: req.session.eAdmin,
+                });
+            });
+        }
+    }).catch(error => {
+        res.render('item/itemDeletado', {
+            layout: 'noMenu.handlebars',
+            error: error,
+        })
+    })
 }
 
 async function postVotarItemConcurso(req, res) {
     const id_item = req.body.id_item;
-    const concurso_id = req.params.concurso_id;
 
     db.Item.findOne({
         where: {
             id_item: id_item,
-            concurso_id: concurso_id,
         }
     }).then(vic => {
         vic.increment('numero_votos', { returning: false });
+        
     }).catch(error => {
         res.json({
             error: error

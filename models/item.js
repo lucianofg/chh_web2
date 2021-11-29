@@ -19,7 +19,7 @@ const ModeloItem = {
         allowNull: false,
     },
     link_item: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     },
     numero_votos: {

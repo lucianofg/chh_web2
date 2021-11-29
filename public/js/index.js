@@ -14,5 +14,14 @@ function validarEmail(email) {
 }
 
 function votarItem(id) {
-    alert("votarItem não implementado");
+    /*
+    var votoRequest = $.post(
+        '/item/vote',
+        { id: id },
+    ).done(() => { 
+    */
+
+    id_item = `votar_${id}`
+    document.getElementById(id_item).innerHTML = "Desfazer";
+
 }

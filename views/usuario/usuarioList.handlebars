@@ -1,5 +1,8 @@
 <h1> Lista de usuário </h1>
 {{#if  usuario.eAdmin}}
+    {{#unless listaUsuarios}}
+        <h1>Lista vazia</h1>
+    {{/unless}}
     <table  class="table table-striped">
     <thead  class="bg-primary">
         <tr>
@@ -50,4 +53,4 @@
 {{else}}
     <h1>Acesso não autorizado.</h1>
 {{/if}}
-<script src="../js/index.js"></script>
+<script src="/js/index.js"></script>
