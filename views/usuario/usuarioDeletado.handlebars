@@ -1,8 +1,16 @@
 {{#if id}}
     <h1>Usuário com id: "{{id}}" foi removido</h1>
 {{else}}
-    <h1>Erro na remoção do usuário com id: {{id}}</h1>
+    <h1></h1>
     <p>{{error}}</p>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na remoção do usuário com id: {{id}}</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 
 <a href='/usuario/list'><button class="btn btn-primary btn-lg">Voltar a lista de usuários</button></a>

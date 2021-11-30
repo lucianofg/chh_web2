@@ -30,11 +30,9 @@ async function getListaItensUsuarioView(req, res) {
             items.nome as nome, 
             items.link_item as link_item, 
             concursos.nome as nome_concurso, 
-            concursos.id as concurso_id,
-            COALESCE(gostou.gostou, FALSE) as gostou
+            concursos.id as concurso_id
         FROM items 
             INNER JOIN concursos ON concursos.id = items.concurso_id
-            LEFT JOIN gostous ON gostous.item_id = items.id
         ;`
     const itens = await db.schema.query(query, {
         type: QueryTypes.SELECT,

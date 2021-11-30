@@ -1,8 +1,14 @@
 {{#if nomeEditado}}
     <h1>As alterações foram salvas para o item {{nomeEditado}}</h1>
 {{else}}
-    <h1>Erro na edição do usuário</h1>
-    <p>{{error}}</p>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na edição do usuário</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 <a href='/item/usuario/list'><button class="btn btn-primary btn-lg">Voltar a sua lista de itens</button></a>
 <br>

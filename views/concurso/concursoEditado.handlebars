@@ -1,8 +1,15 @@
 {{#if concurso}}
     <h1>As alterações foram salvas para o concurso {{concurso}}</h1>
 {{else}}
-    <h1>Erro na edição do concurso</h1>
-    <p>{{error}}</p>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na edição do concurso</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
+
 {{/if}}
 
 {{#if usuario.eAdmin}}

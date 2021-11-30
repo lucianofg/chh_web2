@@ -1,8 +1,15 @@
 {{#if id}}
     <h1>Item com id: "{{id}}" foi removido</h1>
 {{else}}
-    <h1>Erro na remoção do item</h1>
-    <p>{{error}}</p>
+    
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na remoção do item</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 
 {{#if eAdmin}}

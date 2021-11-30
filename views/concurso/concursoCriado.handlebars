@@ -1,8 +1,14 @@
 {{#if concurso}}
     <h1>Concurso "{{concurso}}" criado com sucesso!</h1>
 {{else}}
-    <h1>Erro na criação do concurso</h1>
-    <p>{{error}}</p>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na criação do concurso</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 <a href='/concurso/create'><button class="btn btn-primary btn-lg">Voltar a página de cadastro</button></a>
 <br>

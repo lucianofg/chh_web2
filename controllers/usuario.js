@@ -10,13 +10,15 @@ async function postUsuarioCreate(req, res) {
     const novoSalt = gerarSalt();
     const novoHash = await argon.hash(req.body.senha + novoSalt);
 
+    console.log(req.body.eColaborador);
+
     db.Usuario.create({
         nome: req.body.nome,
         sobrenome: req.body.sobrenome,
         senha: novoHash,
         salt: novoSalt,
         email: req.body.email,
-        eAtivo: req.body.eAtivo,
+        eColaborador: req.body.eColaborador,
         eAdmin: req.body.eAdmin,
     }).then((usuario) => {
         res.render('usuario/usuarioCriado', {

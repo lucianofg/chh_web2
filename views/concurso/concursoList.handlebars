@@ -1,4 +1,4 @@
-<h1> Lista de todos os Concursos</h1>
+<h2> Lista de todos os Concursos</h2>
 {{#if concursos}}
     {{#if usuario.eAdmin}}
         <table  class="table table-hover table-striped">
@@ -60,7 +60,13 @@
         </table>
     {{/if}}
 {{else}}
-    <h1>Erro na recuperação da lista</h1>
-    <pre>{{error}}</pre>
+    <div class="container-sm">
+        <div class="alert alert-warning" role="alert">
+            <h3>Nenhum concurso cadastrado</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 

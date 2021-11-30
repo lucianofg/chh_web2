@@ -1,8 +1,14 @@
 {{#if nomeEditado}}
     <h1>As alterações foram salvas para o usuário {{nomeEditado}}</h1>
 {{else}}
-    <h1>Erro na edição do usuário</h1>
-    <p>{{error}}</p>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Erro na edição do usuário</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}
 {{#if usuario.eAdmin}}
 <a href='/usuario/list'><button class="btn btn-primary btn-lg">Voltar a lista de usuários</button></a>
