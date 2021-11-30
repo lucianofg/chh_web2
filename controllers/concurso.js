@@ -1,9 +1,6 @@
 const db = require('../config/db');
+const { QueryTypes } = require('sequelize');
 const { getUsuario } = require('./utils');
-
-async function getConcursoResultado(req, res) {
-
-}
 
 async function getListaConcursosView(req, res) {
     db.Concurso.findAll().then(concursos => {
@@ -22,29 +19,35 @@ async function getListaConcursosView(req, res) {
 }
 
 async function getConcursoView(req, res) {
-    db.Concurso.findOne({
+    const concurso = await db.Concurso.findOne({
         where: {
             id: req.params.id
         }
-    }).then(concurso => {
-        if (concurso == undefined) throw new Error("Concurso não achado");
-        var aceita_envios = new Date(concurso.prazoEnvioItem) >= new Date() ? true : false;
-        var saiu_resultado = new Date(concurso.dataDivulgacaoResultado) < new Date() ? true : false;
-
-        res.render('concurso/concursoView', {
-            layout: 'main.handlebars',
-            concurso: concurso.toJSON(),
-            concursoAceitaEnvios: aceita_envios,
-            concursoSaiuResultado: saiu_resultado,
-            usuario: getUsuario(req),
-        });
-    }).catch(error => {
-        res.render('concurso/concursoView', {
-            layout: 'main.handlebars',
-            usuario: getUsuario(req),
-            error: error
-        });
     })
+    if (concurso == undefined) throw new Error("Concurso não achado");
+    var aceita_envios = new Date(concurso.prazoEnvioItem) >= new Date() ? true : false;
+    var saiu_resultado = new Date(concurso.dataDivulgacaoResultado) < new Date() ? true : false;
+
+    const query = `
+                SELECT 
+                    id, nome, link_item, numero_votos
+                FROM 
+                    items 
+                INNER JOIN (SELECT MAX(numero_votos) AS votos FROM items) AS tmp
+                    ON tmp.votos = items.numero_votos
+                ;`
+    const itemVencedor = await db.schema.query(query,{
+        type: QueryTypes.SELECT,
+    });
+
+    res.render('concurso/concursoView', {
+        layout: 'main.handlebars',
+        concurso: concurso.toJSON(),
+        concursoAceitaEnvios: aceita_envios,
+        concursoSaiuResultado: saiu_resultado,
+        itemVencedor: itemVencedor[0],
+        usuario: getUsuario(req),
+    });
 }
 
 async function getConcursoCreate(req, res) {
@@ -142,7 +145,6 @@ async function getConcursoDelete(req, res) {
 
 
 module.exports = {
-    getConcursoResultado,
     getListaConcursosView,
     getConcursoView,
     getConcursoCreate,

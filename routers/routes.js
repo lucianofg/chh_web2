@@ -38,7 +38,6 @@ routes.get("/usuario/logout", usuarioController.getUsuarioLogout);
 routes.get("/usuario/list", usuarioController.getUsuarioList);
 
 // Rotas relacionadas aos concursos
-routes.get('/concurso/:id/resultado', concursoController.getConcursoResultado);
 routes.get('/concurso/list', concursoController.getListaConcursosView);
 routes.get('/concurso/:id/view', concursoController.getConcursoView);
 routes.get('/concurso/create', concursoController.getConcursoCreate);

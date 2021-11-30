@@ -12,19 +12,31 @@
         </p>
 
         {{#if concursoAceitaEnvios}}
-        <p>
-            <a href="/item/concurso/{{concurso.id}}/create" >
-                <button class="btn btn-success btn-block">Enviar item para o concurso</button>
-            </a>
-        </p>
+            <p>
+                <a href="/item/concurso/{{concurso.id}}/create" >
+                    <button class="btn btn-success btn-block">Enviar item para o concurso</button>
+                </a>
+            </p>
         {{/if}}
         {{#if concursoSaiuResultado}}
-        <p>
-            <a href="/concurso/{{concurso.id}}/resultado" >
-                <button class="btn btn-primary btn-block">Ver resultado do concurso</button>
-            </a>
-        </p>
+            <p>
+                <button class="btn btn-primary btn-block" 
+                        type="button" 
+                        data-toggle="collapse" 
+                        data-target="#collapseResultado" 
+                        aria-expanded="false" 
+                        aria-controls="collapseResultado">
+                    Ver resultado do concurso
+                </button>
 
+                <div class="collapse" id="collapseResultado">
+                    <div class="card card-body">
+                        <h5>{{itemVencedor.nome}}</h5>
+                        <p><a href={{itemVencedor.link_item}}>Ver item</a></p>
+                        <p><strong>Número de votos:</strong>{{itemVencedor.numero_votos}}</p>
+                    </div>
+                </div>
+            </p>
         {{/if}}
         <p>
             <button class="btn btn-secondary btn-block" 
@@ -67,8 +79,8 @@
             </button>
         </a>
         </p>
-
     </div>
+
 {{else}}
     <h1>Ocorreu algum erro</h1>
     <p>{{error}}</p>
