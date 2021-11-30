@@ -57,5 +57,12 @@
 </div>
 <script src="/js/index.js"></script>
 {{else}}
-    <h1>Acesso não autorizado</h1>
+    <div class="container-sm">
+        <div class="alert alert-danger" role="alert">
+            <h3>Acesso não autorizado</h3>
+            {{#if error}}
+                <pre>{{error}}</pre>
+            {{/if}}
+        </div>
+    </div>
 {{/if}}

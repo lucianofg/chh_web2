@@ -30,7 +30,7 @@ const ModeloItem = {
 };
 
 const Item = schema.define(
-    'item', ModeloItem, { underscored: true },
+    'item', ModeloItem, {underscored: true},
 );
 
 Item.belongsTo(Concurso);

@@ -15,7 +15,6 @@ function getUsuario(req) {
     }
 }
 
-
 module.exports = {
     gerarSalt,
     getUsuario,

@@ -1,6 +1,6 @@
-const { QueryTypes } = require('sequelize');
+const {QueryTypes} = require('sequelize');
 const db = require('../config/db');
-const { getUsuario } = require('./utils');
+const {getUsuario} = require('./utils');
 const uploadsFolder = '/uploads'
 
 async function getListaItensConcursoView(req, res) {
@@ -12,8 +12,10 @@ async function getListaItensConcursoView(req, res) {
             gostous.gostou as gostou
         FROM items LEFT JOIN gostous ON
             items.id = gostous.item_id
+        WHERE items.concurso_id = $1
         ;`
     const itens = await db.schema.query(query, {
+        bind: [req.params.concurso_id],
         type: QueryTypes.SELECT,
     })
     res.render('item/itemConcursoList', {
@@ -45,10 +47,9 @@ async function getListaItensUsuarioView(req, res) {
     });
 }
 
-
 async function getItemView(req, res) {
     db.Item.findOne({
-        where: { id: req.params.id }
+        where: {id: req.params.id}
     }).then(item => {
         res.render('item/itemView', {
             layout: 'main.handlebars',
@@ -93,27 +94,30 @@ async function postItemCreate(req, res) {
 }
 
 async function getItemEdit(req, res) {
-    await db.Item.findOne({
+    db.Item.findOne({
         where: {
             id: req.params.id_item,
-            concurso_id: req.params.concurso_id,
         }
     }).then((item) => {
         res.render('item/itemEdit', {
             item: item.toJSON(),
+            usuario: getUsuario(req),
             layout: 'noMenu.handlebars',
         });
-    }).catch((err) => {
-        res.render('erros/404_not_found', { layout: 'noMenu.handlebars' })
+    }).catch((error) => {
+        res.render('item/itemEdit', {
+            layout: 'noMenu.handlebars',
+            error: error,
+        })
     });
 }
+
 async function postItemEdit(req, res) {
     db.Item.findOne({
-        where: { id: req.body.id }
+        where: {id: req.body.id}
     }).then(item => {
         item.set({
             nome: req.body.nome,
-            link_item: req.body.link_item,
         });
         item.save();
         res.render('item/itemEditado', {
@@ -126,7 +130,6 @@ async function postItemEdit(req, res) {
             error: error,
         });
     })
-
 }
 
 async function getItemDelete(req, res) {

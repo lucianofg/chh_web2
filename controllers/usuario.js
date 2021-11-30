@@ -9,16 +9,14 @@ async function getUsuarioCreate(req, res) {
 async function postUsuarioCreate(req, res) {
     const novoSalt = gerarSalt();
     const novoHash = await argon.hash(req.body.senha + novoSalt);
-
-    console.log(req.body.eColaborador);
-
+    const eColaborador = req.body.eColaborador ? true : false;
     db.Usuario.create({
         nome: req.body.nome,
         sobrenome: req.body.sobrenome,
         senha: novoHash,
         salt: novoSalt,
         email: req.body.email,
-        eColaborador: req.body.eColaborador,
+        eColaborador: eColaborador,
         eAdmin: req.body.eAdmin,
     }).then((usuario) => {
         res.render('usuario/usuarioCriado', {
@@ -58,15 +56,17 @@ async function getUsuarioSelfEdit(req, res) {
             usuario: usuario.toJSON(),
             layout: 'noMenu.handlebars'
         });
-    }).catch(err => {
-        res.render('erros/usuarioNaoAchado');
+    }).catch(error => {
+        res.render('usuario/usuarioEdit', {
+            layout: 'noMenu.handlebars',
+            error: error,
+        });
     });
 }
 
 async function postUsuarioEdit(req, res) {
     const eAdmin = req.body.eAdmin ? true : false;
     const eColaborador = req.body.eColaborador ? true : false;
-
     db.Usuario.findOne({
         where: { id: req.body.id }
     }).then(usuario => {
@@ -84,12 +84,12 @@ async function postUsuarioEdit(req, res) {
             usuario: getUsuario(req),
         });
     }).catch(error => {
-        res.json({
+        res.render('usuario/usuarioEditado', {
+            layout: 'noMenu.handlebars',
             error: error,
+            
         });
     });
-
-    res.redirect('/home');
 }
 
 async function getUsuarioDelete(req, res) {
@@ -131,7 +131,10 @@ async function postUsuarioLogin(req, res) {
             throw new Error("E-mail não cadastrado.")
         }
     }).catch(error => {
-        res.render('erros/usuarioNaoAchado', { error: error })
+        res.render('erros/usuarioNaoAchado', {
+            layout: 'noMenu.handlebars',
+            error: error,
+        })
     });
 }
 

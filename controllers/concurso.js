@@ -1,6 +1,6 @@
 const db = require('../config/db');
-const { QueryTypes } = require('sequelize');
-const { getUsuario } = require('./utils');
+const {QueryTypes} = require('sequelize');
+const {getUsuario} = require('./utils');
 
 async function getListaConcursosView(req, res) {
     db.Concurso.findAll().then(concursos => {
@@ -27,19 +27,17 @@ async function getConcursoView(req, res) {
     if (concurso == undefined) throw new Error("Concurso não achado");
     var aceita_envios = new Date(concurso.prazoEnvioItem) >= new Date() ? true : false;
     var saiu_resultado = new Date(concurso.dataDivulgacaoResultado) < new Date() ? true : false;
-
     const query = `
-                SELECT 
-                    id, nome, link_item, numero_votos
-                FROM 
-                    items 
-                INNER JOIN (SELECT MAX(numero_votos) AS votos FROM items) AS tmp
-                    ON tmp.votos = items.numero_votos
-                ;`
-    const itemVencedor = await db.schema.query(query,{
+        SELECT 
+            id, nome, link_item, numero_votos
+        FROM 
+            items 
+        INNER JOIN (SELECT MAX(numero_votos) AS votos FROM items) AS tmp
+            ON tmp.votos = items.numero_votos
+        ;`
+    const itemVencedor = await db.schema.query(query, {
         type: QueryTypes.SELECT,
     });
-
     res.render('concurso/concursoView', {
         layout: 'main.handlebars',
         concurso: concurso.toJSON(),
@@ -88,10 +86,8 @@ async function getConcursoEdit(req, res) {
         if (concurso == null) throw new Error("Concurso não achado");
         res.render('concurso/concursoEdit', {
             concurso: concurso.toJSON(),
-            usuario: {
-                id: req.session.id_usario,
-                eAdmin: req.session.eAdmin,
-            },
+            usuario: getUsuario(req),
+            layout: 'noMenu.handlebars',
         });
     }).catch(error => {
         res.render('erros/concursoNaoAchado', {
@@ -99,12 +95,11 @@ async function getConcursoEdit(req, res) {
             error: error,
         });
     });
-
 }
 
 async function postConcursoEdit(req, res) {
     db.Concurso.findOne({
-        where: { id: req.body.id }
+        where: {id: req.body.id}
     }).then(concurso => {
         concurso.set({
             nome: req.body.nome,
@@ -130,7 +125,7 @@ async function postConcursoEdit(req, res) {
 async function getConcursoDelete(req, res) {
     if (req.session.eAdmin) {
         db.Concurso.destroy({
-            where: { id: req.params.id, }
+            where: {id: req.params.id, }
         });
         res.render('concurso/concursoDeletado', {
             layout: 'noMenu.handlebars',
@@ -142,7 +137,6 @@ async function getConcursoDelete(req, res) {
         });
     }
 }
-
 
 module.exports = {
     getListaConcursosView,

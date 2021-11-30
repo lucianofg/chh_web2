@@ -1,5 +1,5 @@
 /* Durante o cadastro do usuário, verifica se as senhas colocadas são equivalentes */
-$('#isenha, #irepsenha').on('keyup', function() {
+$('#isenha, #irepsenha').on('keyup', function () {
     if ($('#isenha').val() == $('#irepsenha').val()) {
         $('#irepsenha_mensagem').html('As senhas são iguais').css('color', 'green');
         $('#icadastrar').prop("disabled", false);
@@ -20,7 +20,7 @@ function votarItem(id, usuario_id) {
         $.post('/api/item/votar', {
             item_id: id,
             usuario_id: usuario_id,
-            gostou: false 
+            gostou: false
         }, (data, status) => {
             document.getElementById(id_item).innerHTML = "Gostar";
             document.getElementById(id_item).className = "btn btn-outline-success"
@@ -29,7 +29,7 @@ function votarItem(id, usuario_id) {
         $.post('/api/item/votar', {
             item_id: id,
             usuario_id: usuario_id,
-            gostou: true 
+            gostou: true
         }, (data, status) => {
             document.getElementById(id_item).innerHTML = "Gostei";
             document.getElementById(id_item).className = "btn btn-success"

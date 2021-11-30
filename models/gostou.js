@@ -14,7 +14,7 @@ const ModeloGostou = {
 };
 
 const Gostou = schema.define(
-    'gostou', ModeloGostou, { underscored: true },
+    'gostou', ModeloGostou, {underscored: true},
 );
 
 Item.belongsToMany(Usuario, {through: 'gostou'});

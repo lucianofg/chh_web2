@@ -1,27 +1,25 @@
 {{#if usuario.id}}
-{{#if item}}
-<div class="col-md-4 col-md-offset-4">
-    <form action="/item/edit" 
-          method="post" 
-          enctype="multipart/form-data">
-        <input type="hidden" name="id" value="{{usuario.id}}">
-
-        <div class="form-group">
-            <label for="inome">Nome</label>
-            <input type="text" 
-                class="form-control" 
-                id="inome" 
-                name="nome" 
-                value={{item.nome}}>
+    {{#if item}}
+        <div class="col-md-4 col-md-offset-4">
+            <form action="/item/edit" method="post">
+                <input type="hidden" name="id" value="{{item.id}}">
+        
+                <div class="form-group">
+                    <label for="inome">Nome</label>
+                    <input type="text" 
+                        class="form-control" 
+                        id="inome" 
+                        name="nome" 
+                        value="{{item.nome}}">
+                </div>
+        
+                <input id="isalvar" 
+                       class="btn btn-success" 
+                       type="submit" 
+                       value="Salvar">
+            </form>
         </div>
-
-        <input id="isalvar" 
-               class="btn btn-success" 
-               type="submit" 
-               value="Cadastrar">
-    </form>
-</div>
-{{/if}} <!-- Item -->
+    {{/if}} <!-- Item -->
 {{else}}
     <h1>Acesso não autorizado</h1>
 {{/if}} <!-- Usuário
