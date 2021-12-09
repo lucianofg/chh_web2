@@ -9,15 +9,20 @@ async function getListaItensConcursoView(req, res) {
             items.id as id,
             items.nome as nome,
             items.link_item as link_item,
-            gostous.gostou as gostou
-        FROM items LEFT JOIN gostous ON
-            items.id = gostous.item_id
-        WHERE items.concurso_id = $1
+            COALESCE(g.gostou, FALSE) as gostou
+        FROM items 
+        FULL OUTER JOIN (
+            SELECT * FROM gostous WHERE usuario_id = $1
+        ) as g ON
+                items.id = g.item_id
+        WHERE items.concurso_id = $2;
         ;`
-    const itens = await db.schema.query(query, {
-        bind: [req.params.concurso_id],
-        type: QueryTypes.SELECT,
-    })
+    if (req.session.usuario_id) {
+        var itens = await db.schema.query(query, {
+            bind: [req.session.usuario_id, req.params.concurso_id],
+            type: QueryTypes.SELECT,
+        })
+    } else itens = {}
     res.render('item/itemConcursoList', {
         layout: 'main.handlebars',
         itens: itens,
@@ -35,8 +40,11 @@ async function getListaItensUsuarioView(req, res) {
             concursos.id as concurso_id
         FROM items 
             INNER JOIN concursos ON concursos.id = items.concurso_id
+        WHERE
+            items.usuario_id = $1
         ;`
     const itens = await db.schema.query(query, {
+        bind: [req.session.usuario_id],
         type: QueryTypes.SELECT,
     })
     console.log(itens);

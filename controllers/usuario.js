@@ -37,7 +37,10 @@ async function getUsuarioEdit(req, res) {
             id: req.params.id
         }
     }).then((usuario) => {
-        res.render('usuario/usuarioEdit', { usuario: usuario.toJSON() });
+        res.render('usuario/usuarioEdit', {
+            layout: 'noMenu.handlebars',
+            usuario: usuario.toJSON(),
+        });
     }).catch(error => {
         res.render('erros/usuarioNaoAchado', {
             layout: 'noMenu.handlebars',
